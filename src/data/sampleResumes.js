@@ -122,7 +122,7 @@ export const sampleResumes = [
     id: 'marketing-manager',
     label: 'Marketing Manager',
     emoji: '📈',
-    template: 'classic',
+    template: 'executive',
     data: {
       personal: {
         name: 'James Rivera',
@@ -178,7 +178,7 @@ export const sampleResumes = [
     id: 'recent-graduate',
     label: 'Recent Graduate',
     emoji: '🎓',
-    template: 'modern',
+    template: 'creative',
     data: {
       personal: {
         name: 'Priya Patel',

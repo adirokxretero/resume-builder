@@ -2,11 +2,14 @@ const templates = [
   { id: 'modern', name: 'Modern', color: '#1e3a5f' },
   { id: 'classic', name: 'Classic', color: '#2c2c2c' },
   { id: 'minimal', name: 'Minimal', color: '#5f7161' },
+  { id: 'bold', name: 'Bold', color: '#c05621' },
+  { id: 'executive', name: 'Executive', color: '#9a7b4f' },
+  { id: 'creative', name: 'Creative', color: '#0d9488' },
 ]
 
 export default function TemplateSelector({ selected, onSelect }) {
   return (
-    <div style={{ display: 'flex', gap: '5px' }}>
+    <div style={{ display: 'flex', gap: '5px', overflowX: 'auto' }}>
       {templates.map(t => {
         const isActive = selected === t.id
         return (
@@ -16,7 +19,7 @@ export default function TemplateSelector({ selected, onSelect }) {
             style={{
               display: 'flex', alignItems: 'center', gap: '7px',
               padding: '7px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
-              cursor: 'pointer', transition: 'all 0.2s',
+              cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap',
               border: isActive ? '1.5px solid #c05621' : '1.5px solid #e2ddd7',
               background: isActive ? '#fdf2ec' : '#fff',
               color: isActive ? '#c05621' : '#6b6560',

@@ -1,11 +1,17 @@
 import ModernTemplate from './templates/ModernTemplate'
 import ClassicTemplate from './templates/ClassicTemplate'
 import MinimalTemplate from './templates/MinimalTemplate'
+import BoldTemplate from './templates/BoldTemplate'
+import ExecutiveTemplate from './templates/ExecutiveTemplate'
+import CreativeTemplate from './templates/CreativeTemplate'
 
 const templateMap = {
   modern: ModernTemplate,
   classic: ClassicTemplate,
   minimal: MinimalTemplate,
+  bold: BoldTemplate,
+  executive: ExecutiveTemplate,
+  creative: CreativeTemplate,
 }
 
 export default function ResumePreview({ data, template, previewRef, scale = 0.5 }) {

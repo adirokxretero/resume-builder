@@ -131,7 +131,7 @@ export default function Landing() {
       {/* Social proof strip */}
       <section style={{ padding: '32px 24px', borderTop: '1px solid #ede8e2', borderBottom: '1px solid #ede8e2' }}>
         <div style={{ maxWidth: '700px', margin: '0 auto', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '32px', color: '#a3a098', fontSize: '14px', fontWeight: 500 }}>
-          <span>3 professional templates</span>
+          <span>6 professional templates</span>
           <span style={{ color: '#d4cfc9' }}>·</span>
           <span>Live preview</span>
           <span style={{ color: '#d4cfc9' }}>·</span>
@@ -178,7 +178,7 @@ export default function Landing() {
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
             <p style={{ fontSize: '13px', fontWeight: 700, color: '#c05621', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '12px' }}>Templates</p>
             <h2 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', fontWeight: 800, color: '#1a1a1a', lineHeight: 1.15, letterSpacing: '-0.03em', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
-              Three styles. Zero compromises.
+              Six styles. Zero compromises.
             </h2>
             <p style={{ marginTop: '14px', color: '#6b6560', fontSize: '16px', maxWidth: '480px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6 }}>
               Each template is designed for readability and ATS compatibility. Pick the one that suits your vibe.
@@ -189,6 +189,9 @@ export default function Landing() {
               { name: 'Modern', desc: 'Two-column with a dark sidebar. Confident, structured, tech-friendly.', color: '#1e3a5f', tag: 'Popular' },
               { name: 'Classic', desc: 'Single-column with serif headings. Timeless, clean, universally respected.', color: '#2c2c2c', tag: 'Versatile' },
               { name: 'Minimal', desc: 'Lots of whitespace, thin dividers. Quiet confidence for senior roles.', color: '#5f7161', tag: 'Elegant' },
+              { name: 'Bold', desc: 'Colored header banner, dark skill tags. Makes a strong first impression.', color: '#c05621', tag: 'Standout' },
+              { name: 'Executive', desc: 'Gold accents, centered layout, serif fonts. Built for leadership roles.', color: '#9a7b4f', tag: 'Premium' },
+              { name: 'Creative', desc: 'Teal gradient bar, rounded cards, modern feel. Great for design & tech.', color: '#0d9488', tag: 'Fresh' },
             ].map((t, i) => (
               <div key={i} style={{
                 backgroundColor: '#fff', borderRadius: '18px', overflow: 'hidden',
