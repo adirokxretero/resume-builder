@@ -143,40 +143,47 @@ export default function AIGenerator({ onGenerate }) {
       <div
         onClick={() => { if (!loading) setOpen(false) }}
         style={{
-          position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.6)',
-          backdropFilter: 'blur(8px)', zIndex: 200, animation: 'fadeIn 0.15s ease-out',
+          position: 'fixed', inset: 0,
+          backgroundColor: 'rgba(0,0,0,0.6)',
+          backdropFilter: 'blur(8px)', zIndex: 200,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          padding: '20px',
+          animation: 'fadeIn 0.15s ease-out',
         }}
-      />
-
-      <div style={{
-        position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)',
-        width: '90%', maxWidth: '500px', background: '#1C1C28',
-        borderRadius: '20px', border: '1px solid #2A2A3A',
-        boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
-        zIndex: 201, overflow: 'hidden', animation: 'modalIn 0.2s ease-out',
-      }}>
-        <div style={{
-          padding: '24px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div>
-            <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.02em', fontFamily: "'DM Sans', sans-serif" }}>
-              AI Resume Generator
-            </h2>
-            <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '4px' }}>
-              Describe what you need — we'll write the rest
-            </p>
+      >
+        <div
+          onClick={e => e.stopPropagation()}
+          style={{
+            width: '100%', maxWidth: '500px', background: '#1C1C28',
+            borderRadius: '20px', border: '1px solid #2A2A3A',
+            boxShadow: '0 30px 80px rgba(0,0,0,0.6)',
+            overflow: 'hidden', animation: 'modalIn 0.2s ease-out',
+            maxHeight: 'calc(100vh - 40px)', display: 'flex', flexDirection: 'column',
+          }}
+        >
+          <div style={{
+            padding: '24px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexShrink: 0,
+          }}>
+            <div>
+              <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.02em', fontFamily: "'DM Sans', sans-serif" }}>
+                AI Resume Generator
+              </h2>
+              <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '4px' }}>
+                Describe what you need — we'll write the rest
+              </p>
+            </div>
+            <button
+              onClick={() => { if (!loading) setOpen(false) }}
+              style={{ padding: '6px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', display: 'flex' }}
+            >
+              <svg style={{ width: '18px', height: '18px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
           </div>
-          <button
-            onClick={() => { if (!loading) setOpen(false) }}
-            style={{ padding: '6px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', display: 'flex' }}
-          >
-            <svg style={{ width: '18px', height: '18px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
 
-        <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px', overflowY: 'auto' }}>
           <div>
             <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#8A8A9A', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               What kind of resume?
@@ -263,6 +270,7 @@ export default function AIGenerator({ onGenerate }) {
               </>
             )}
           </button>
+        </div>
         </div>
       </div>
     </>
