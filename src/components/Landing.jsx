@@ -61,14 +61,16 @@ const features = [
 
 export default function Landing() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif" }}>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-surface-200">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <nav style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50, backgroundColor: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #e2e8f0', height: '64px' }}>
+        <div style={{ maxWidth: '1152px', margin: '0 auto', padding: '0 24px', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <Logo />
           <Link
             to="/builder"
-            className="bg-primary-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-colors shadow-sm"
+            style={{ backgroundColor: '#2563eb', color: '#fff', padding: '8px 20px', borderRadius: '8px', fontSize: '14px', fontWeight: 600, textDecoration: 'none', transition: 'background-color 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#1d4ed8'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#2563eb'}
           >
             Start Building
           </Link>
@@ -76,35 +78,39 @@ export default function Landing() {
       </nav>
 
       {/* Hero */}
-      <section className="pt-40 pb-28 px-6 bg-gradient-to-b from-blue-50 via-white to-white border-b border-surface-200">
-        <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+      <section style={{ paddingTop: '160px', paddingBottom: '100px', paddingLeft: '24px', paddingRight: '24px', background: 'linear-gradient(180deg, #eff6ff 0%, #ffffff 100%)' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#dbeafe', color: '#1d4ed8', padding: '6px 16px', borderRadius: '50px', fontSize: '14px', fontWeight: 500, marginBottom: '32px' }}>
+            <svg style={{ width: '16px', height: '16px' }} fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z" clipRule="evenodd" />
             </svg>
             Free &amp; Open Source
           </div>
-          <h1 className="text-5xl md:text-7xl font-display font-bold text-surface-900 leading-tight tracking-tight">
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 800, color: '#0f172a', lineHeight: 1.1, letterSpacing: '-0.02em', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
             Build a Resume That
-            <span className="text-primary-600 block mt-2">Lands Interviews</span>
+            <span style={{ display: 'block', color: '#2563eb', marginTop: '8px' }}>Lands Interviews</span>
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-surface-500 max-w-2xl mx-auto leading-relaxed">
+          <p style={{ marginTop: '24px', fontSize: '18px', color: '#64748b', maxWidth: '600px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
             Create a professional, ATS-friendly resume in minutes. Choose from beautiful templates,
             edit with a live preview, and export as PDF — all for free.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+          <div style={{ marginTop: '40px', display: 'flex', flexWrap: 'wrap', gap: '16px', justifyContent: 'center' }}>
             <Link
               to="/builder"
-              className="inline-flex items-center justify-center gap-2 bg-primary-600 text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-primary-700 transition-all shadow-lg shadow-primary-600/25 hover:shadow-xl hover:shadow-primary-600/30 hover:-translate-y-0.5"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#2563eb', color: '#fff', padding: '16px 32px', borderRadius: '12px', fontSize: '18px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 10px 25px rgba(37, 99, 235, 0.3)', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#1d4ed8'; e.currentTarget.style.transform = 'translateY(-2px)' }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#2563eb'; e.currentTarget.style.transform = 'translateY(0)' }}
             >
               Start Building Your Resume
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
             </Link>
             <a
               href="#features"
-              className="inline-flex items-center justify-center gap-2 bg-white text-surface-700 px-8 py-4 rounded-xl text-lg font-semibold border border-surface-200 hover:border-surface-300 hover:bg-surface-50 transition-all"
+              style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#fff', color: '#334155', padding: '16px 32px', borderRadius: '12px', fontSize: '18px', fontWeight: 600, textDecoration: 'none', border: '1px solid #e2e8f0', transition: 'all 0.2s' }}
+              onMouseEnter={e => { e.currentTarget.style.backgroundColor = '#f8fafc'; e.currentTarget.style.borderColor = '#cbd5e1' }}
+              onMouseLeave={e => { e.currentTarget.style.backgroundColor = '#fff'; e.currentTarget.style.borderColor = '#e2e8f0' }}
             >
               See Features
             </a>
@@ -113,27 +119,29 @@ export default function Landing() {
       </section>
 
       {/* Features */}
-      <section id="features" className="py-24 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-surface-900">
+      <section id="features" style={{ padding: '96px 24px', backgroundColor: '#ffffff' }}>
+        <div style={{ maxWidth: '1152px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '64px' }}>
+            <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#0f172a', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
               Everything You Need
             </h2>
-            <p className="mt-4 text-surface-500 text-lg max-w-xl mx-auto">
+            <p style={{ marginTop: '16px', color: '#64748b', fontSize: '18px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.6 }}>
               Powerful features to help you create the perfect resume without any hassle.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
             {features.map((f, i) => (
               <div
                 key={i}
-                className="group p-6 rounded-2xl border border-surface-200 hover:border-primary-200 hover:shadow-lg hover:shadow-primary-100/50 transition-all duration-300"
+                style={{ padding: '28px', borderRadius: '16px', border: '1px solid #e2e8f0', transition: 'all 0.3s', cursor: 'default' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = '#bfdbfe'; e.currentTarget.style.boxShadow = '0 10px 30px rgba(37, 99, 235, 0.08)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#e2e8f0'; e.currentTarget.style.boxShadow = 'none' }}
               >
-                <div className="w-12 h-12 bg-primary-100 text-primary-600 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary-600 group-hover:text-white transition-colors duration-300">
+                <div style={{ width: '48px', height: '48px', backgroundColor: '#eff6ff', color: '#2563eb', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px' }}>
                   {f.icon}
                 </div>
-                <h3 className="text-lg font-semibold text-surface-800 mb-2">{f.title}</h3>
-                <p className="text-surface-500 leading-relaxed">{f.desc}</p>
+                <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#1e293b', marginBottom: '8px' }}>{f.title}</h3>
+                <p style={{ color: '#64748b', lineHeight: 1.6, fontSize: '15px' }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -141,34 +149,37 @@ export default function Landing() {
       </section>
 
       {/* Templates Preview */}
-      <section id="templates" className="py-24 px-6 bg-surface-50">
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-surface-900">
+      <section id="templates" style={{ padding: '96px 24px', backgroundColor: '#f8fafc' }}>
+        <div style={{ maxWidth: '1152px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#0f172a', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
             Professional Templates
           </h2>
-          <p className="mt-4 text-surface-500 text-lg max-w-xl mx-auto mb-16">
+          <p style={{ marginTop: '16px', color: '#64748b', fontSize: '18px', maxWidth: '560px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '64px', lineHeight: 1.6 }}>
             Choose the style that matches your personality and industry.
           </p>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '24px' }}>
             {[
-              { name: 'Modern', desc: 'Clean two-column layout with a colored sidebar. Great for tech and creative roles.', color: 'bg-primary-600' },
-              { name: 'Classic', desc: 'Traditional single-column format with serif accents. Perfect for corporate and academic positions.', color: 'bg-surface-800' },
-              { name: 'Minimal', desc: 'Ultra-clean design with generous whitespace. Ideal for senior professionals and executives.', color: 'bg-accent-600' },
+              { name: 'Modern', desc: 'Clean two-column layout with a colored sidebar. Great for tech and creative roles.', color: '#2563eb' },
+              { name: 'Classic', desc: 'Traditional single-column format with serif accents. Perfect for corporate and academic positions.', color: '#1e293b' },
+              { name: 'Minimal', desc: 'Ultra-clean design with generous whitespace. Ideal for senior professionals and executives.', color: '#7c3aed' },
             ].map((t, i) => (
-              <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-surface-200 hover:shadow-xl transition-shadow duration-300">
-                <div className={`${t.color} h-48 flex items-center justify-center`}>
-                  <div className="w-28 h-36 bg-white rounded-lg shadow-2xl flex flex-col p-3 gap-2">
-                    <div className="w-8 h-8 rounded-full bg-surface-200 mx-auto" />
-                    <div className="h-1.5 bg-surface-200 rounded w-full" />
-                    <div className="h-1 bg-surface-100 rounded w-3/4" />
-                    <div className="h-1 bg-surface-100 rounded w-full" />
-                    <div className="h-1 bg-surface-100 rounded w-5/6" />
-                    <div className="h-1 bg-surface-100 rounded w-2/3" />
+              <div key={i} style={{ backgroundColor: '#fff', borderRadius: '16px', overflow: 'hidden', border: '1px solid #e2e8f0', transition: 'box-shadow 0.3s' }}
+                onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.08)'}
+                onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+              >
+                <div style={{ backgroundColor: t.color, height: '192px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: '112px', height: '144px', backgroundColor: '#fff', borderRadius: '8px', boxShadow: '0 25px 50px rgba(0,0,0,0.25)', display: 'flex', flexDirection: 'column', padding: '12px', gap: '8px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#e2e8f0', margin: '0 auto' }} />
+                    <div style={{ height: '6px', backgroundColor: '#e2e8f0', borderRadius: '3px', width: '100%' }} />
+                    <div style={{ height: '4px', backgroundColor: '#f1f5f9', borderRadius: '2px', width: '75%' }} />
+                    <div style={{ height: '4px', backgroundColor: '#f1f5f9', borderRadius: '2px', width: '100%' }} />
+                    <div style={{ height: '4px', backgroundColor: '#f1f5f9', borderRadius: '2px', width: '83%' }} />
+                    <div style={{ height: '4px', backgroundColor: '#f1f5f9', borderRadius: '2px', width: '66%' }} />
                   </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="font-semibold text-lg text-surface-800">{t.name}</h3>
-                  <p className="text-surface-500 text-sm mt-2 leading-relaxed">{t.desc}</p>
+                <div style={{ padding: '24px' }}>
+                  <h3 style={{ fontWeight: 600, fontSize: '18px', color: '#1e293b' }}>{t.name}</h3>
+                  <p style={{ color: '#64748b', fontSize: '14px', marginTop: '8px', lineHeight: 1.6 }}>{t.desc}</p>
                 </div>
               </div>
             ))}
@@ -177,20 +188,22 @@ export default function Landing() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 px-6 bg-gradient-to-r from-primary-600 to-primary-700">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-display font-bold text-white">
+      <section style={{ padding: '96px 24px', background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)' }}>
+        <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, color: '#ffffff', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
             Ready to Build Your Resume?
           </h2>
-          <p className="mt-4 text-primary-100 text-lg">
+          <p style={{ marginTop: '16px', color: '#bfdbfe', fontSize: '18px', lineHeight: 1.6 }}>
             Join thousands of professionals who have created stunning resumes with ResumeForge.
           </p>
           <Link
             to="/builder"
-            className="mt-8 inline-flex items-center gap-2 bg-white text-primary-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-primary-50 transition-colors shadow-lg"
+            style={{ marginTop: '32px', display: 'inline-flex', alignItems: 'center', gap: '8px', backgroundColor: '#fff', color: '#1d4ed8', padding: '16px 32px', borderRadius: '12px', fontSize: '18px', fontWeight: 600, textDecoration: 'none', boxShadow: '0 10px 25px rgba(0,0,0,0.15)', transition: 'all 0.2s' }}
+            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
           >
             Get Started — It's Free
-            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <svg style={{ width: '20px', height: '20px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
             </svg>
           </Link>
