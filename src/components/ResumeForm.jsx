@@ -10,13 +10,14 @@ const sectionTabs = [
 
 const inputStyle = {
   width: '100%', padding: '11px 14px',
-  backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px',
-  fontSize: '15px', color: '#f0ece6', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
+  backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid #2A2A3A', borderRadius: '10px',
+  fontSize: '15px', color: '#F0F0F5', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
 }
 
 const labelStyle = {
   display: 'block', fontSize: '12px', fontWeight: 600,
-  color: 'rgba(255,255,255,0.35)', marginBottom: '7px', letterSpacing: '0.02em', textTransform: 'uppercase',
+  color: '#8A8A9A', marginBottom: '7px', letterSpacing: '0.02em', textTransform: 'uppercase',
+  fontFamily: "'JetBrains Mono', monospace",
 }
 
 function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
@@ -26,8 +27,8 @@ function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
       <input
         type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
-        onFocus={e => { e.target.style.borderColor = 'rgba(232,148,74,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.1)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(0,212,255,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = '#2A2A3A'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -40,8 +41,8 @@ function Textarea({ label, value, onChange, placeholder = '', rows = 3 }) {
       <textarea
         value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         style={{ ...inputStyle, resize: 'none', lineHeight: 1.6 }}
-        onFocus={e => { e.target.style.borderColor = 'rgba(232,148,74,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.1)' }}
-        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(0,212,255,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = '#2A2A3A'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -53,12 +54,12 @@ function AddButton({ onClick, label }) {
       onClick={onClick}
       style={{
         display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px',
-        color: '#e8944a', fontWeight: 600, background: 'none', border: '1px dashed rgba(232,148,74,0.25)',
+        color: '#00D4FF', fontWeight: 600, background: 'none', border: '1px dashed rgba(0,212,255,0.2)',
         padding: '12px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
         width: '100%', justifyContent: 'center',
       }}
-      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(192,86,33,0.08)'; e.currentTarget.style.borderColor = 'rgba(232,148,74,0.4)' }}
-      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(232,148,74,0.25)' }}
+      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(0,212,255,0.06)'; e.currentTarget.style.borderColor = 'rgba(0,212,255,0.4)' }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)' }}
     >
       <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -73,7 +74,7 @@ function DeleteButton({ onClick }) {
     <button
       onClick={onClick}
       style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: 'rgba(255,255,255,0.2)', transition: 'all 0.2s', display: 'flex' }}
-      onMouseEnter={e => { e.currentTarget.style.color = '#e8944a'; e.currentTarget.style.background = 'rgba(192,86,33,0.1)' }}
+      onMouseEnter={e => { e.currentTarget.style.color = '#FF4D6D'; e.currentTarget.style.background = 'rgba(255,77,109,0.1)' }}
       onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
     >
       <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -84,7 +85,7 @@ function DeleteButton({ onClick }) {
 }
 
 const cardStyle = {
-  backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px',
+  backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid #2A2A3A', borderRadius: '14px',
   padding: '20px', position: 'relative', display: 'flex', flexDirection: 'column', gap: '14px',
 }
 
@@ -99,7 +100,7 @@ function PersonalSection({ data, updatePersonal }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '18px', background: 'rgba(255,255,255,0.03)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '18px', background: 'rgba(255,255,255,0.03)', borderRadius: '14px', border: '1px solid #2A2A3A' }}>
         <div style={{ position: 'relative' }}>
           <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
             {data.photo ? (
@@ -116,10 +117,10 @@ function PersonalSection({ data, updatePersonal }) {
           </label>
         </div>
         <div>
-          <p style={{ fontSize: '14px', fontWeight: 600, color: '#f0ece6' }}>Profile Photo</p>
-          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' }}>Click to upload</p>
+          <p style={{ fontSize: '14px', fontWeight: 600, color: '#F0F0F5' }}>Profile Photo</p>
+          <p style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '2px' }}>Click to upload</p>
           {data.photo && (
-            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '11px', color: '#e8944a', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 600 }}>
+            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '11px', color: '#FF4D6D', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 600 }}>
               Remove
             </button>
           )}
@@ -148,17 +149,17 @@ function SkillsSection({ skills, onChange }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>Add your skills — they appear as tags on the resume.</p>
+      <p style={{ fontSize: '13px', color: '#8A8A9A', lineHeight: 1.5 }}>Add your skills — they appear as tags on the resume.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid #2A2A3A', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
               value={skill} onChange={e => updateSkill(i, e.target.value)} placeholder="Type skill..."
-              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#f0ece6', fontFamily: 'inherit' }}
+              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#F0F0F5', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
               <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#e8944a' }} onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)' }}>
+                onMouseEnter={e => { e.currentTarget.style.color = '#FF4D6D' }} onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)' }}>
                 <svg style={{ width: '12px', height: '12px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             )}
@@ -212,8 +213,8 @@ function ExperienceSection({ experience, onChange }) {
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', cursor: 'pointer' }}>
                 <input type="checkbox" checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
-                  style={{ width: '14px', height: '14px', accentColor: '#e8944a' }} />
-                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)' }}>Currently here</span>
+                  style={{ width: '14px', height: '14px', accentColor: '#00D4FF' }} />
+                <span style={{ fontSize: '12px', color: '#8A8A9A' }}>Currently here</span>
               </label>
             </div>
           </div>
@@ -258,19 +259,19 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Progress Bar */}
       <div style={{ height: '2px', background: 'rgba(255,255,255,0.04)', flexShrink: 0 }}>
-        <div style={{ height: '100%', width: `${progress}%`, background: 'linear-gradient(90deg, #c05621, #e8944a)', transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)', borderRadius: '0 1px 1px 0' }} />
+        <div style={{ height: '100%', width: `${progress}%`, background: 'linear-gradient(90deg, #00D4FF, #7B61FF)', transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)', borderRadius: '0 1px 1px 0' }} />
       </div>
       {/* Step label */}
-      <div style={{ padding: '8px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#17171a' }}>
-        <span style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+      <div style={{ padding: '8px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#13131A' }}>
+        <span style={{ fontSize: '10px', fontWeight: 700, color: '#8A8A9A', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: "'JetBrains Mono', monospace" }}>
           Step {stepIndex + 1} of {sectionTabs.length}
         </span>
-        <span style={{ fontSize: '10px', fontWeight: 600, color: '#e8944a', letterSpacing: '0.02em' }}>
+        <span style={{ fontSize: '10px', fontWeight: 600, color: '#00D4FF', letterSpacing: '0.02em', fontFamily: "'JetBrains Mono', monospace" }}>
           {Math.round(progress)}%
         </span>
       </div>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', padding: '8px 16px 0', overflowX: 'auto', borderBottom: '1px solid rgba(255,255,255,0.06)', background: '#17171a' }}>
+      <div style={{ display: 'flex', gap: '2px', padding: '8px 16px 0', overflowX: 'auto', borderBottom: '1px solid #2A2A3A', background: '#13131A' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
@@ -282,9 +283,9 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
                 padding: '10px 14px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
-                borderBottom: isActive ? '2px solid #e8944a' : '2px solid transparent',
+                borderBottom: isActive ? '2px solid #00D4FF' : '2px solid transparent',
                 background: isActive ? 'rgba(255,255,255,0.04)' : 'transparent',
-                color: isActive ? '#e8944a' : 'rgba(255,255,255,0.3)',
+                color: isActive ? '#00D4FF' : 'rgba(255,255,255,0.3)',
               }}
             >
               <svg style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

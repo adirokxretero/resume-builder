@@ -20,9 +20,9 @@ export default function TemplateSelector({ selected, onSelect }) {
               display: 'flex', alignItems: 'center', gap: '6px',
               padding: '6px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
               cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap',
-              border: isActive ? '1px solid rgba(232,148,74,0.4)' : '1px solid rgba(255,255,255,0.06)',
-              background: isActive ? 'rgba(192,86,33,0.12)' : 'transparent',
-              color: isActive ? '#e8944a' : 'rgba(255,255,255,0.4)',
+              border: isActive ? '1px solid rgba(0,212,255,0.4)' : '1px solid #2A2A3A',
+              background: isActive ? 'rgba(0,212,255,0.08)' : 'transparent',
+              color: isActive ? '#00D4FF' : 'rgba(255,255,255,0.4)',
             }}
           >
             <div style={{ width: '8px', height: '8px', borderRadius: '2px', backgroundColor: t.color, opacity: isActive ? 1 : 0.4 }} />

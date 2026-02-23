@@ -25,7 +25,7 @@ export default function ResumePreview({ data, template, previewRef, scale = 0.5 
           width: '210mm',
           minHeight: '297mm',
           background: '#ffffff',
-          boxShadow: '0 0 60px rgba(0,0,0,0.3), 0 0 1px rgba(255,255,255,0.1)',
+          boxShadow: '0 0 60px rgba(0,0,0,0.4), 0 0 1px rgba(0,212,255,0.08)',
           borderRadius: '4px',
           transform: `scale(${scale})`,
           transformOrigin: 'top center',

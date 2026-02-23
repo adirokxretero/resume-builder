@@ -44,11 +44,11 @@ const features = [
 ]
 
 const templateData = [
-  { name: 'Modern', desc: 'Two-column sidebar. Confident & tech-friendly.', color: '#1e3a5f', tag: 'Popular', tagColor: '#60a5fa' },
-  { name: 'Classic', desc: 'Serif headings. Timeless & respected.', color: '#2c2c2c', tag: 'Versatile', tagColor: '#a1a1aa' },
+  { name: 'Modern', desc: 'Two-column sidebar. Confident & tech-friendly.', color: '#1e3a5f', tag: 'Popular', tagColor: '#00FFB2' },
+  { name: 'Classic', desc: 'Serif headings. Timeless & respected.', color: '#2c2c2c', tag: 'Versatile', tagColor: '#8A8A9A' },
   { name: 'Minimal', desc: 'Clean whitespace. Quiet confidence.', color: '#5f7161', tag: 'Elegant', tagColor: '#86efac' },
-  { name: 'Bold', desc: 'Colored banner. Strong impression.', color: '#c05621', tag: 'Standout', tagColor: '#fb923c' },
-  { name: 'Executive', desc: 'Gold accents. Built for leadership.', color: '#9a7b4f', tag: 'Premium', tagColor: '#fbbf24' },
+  { name: 'Bold', desc: 'Colored banner. Strong impression.', color: '#c05621', tag: 'Standout', tagColor: '#00D4FF' },
+  { name: 'Executive', desc: 'Gold accents. Built for leadership.', color: '#9a7b4f', tag: 'Premium', tagColor: '#7B61FF' },
   { name: 'Creative', desc: 'Teal gradient. Modern & fresh.', color: '#0d9488', tag: 'Fresh', tagColor: '#5eead4' },
 ]
 
@@ -104,12 +104,12 @@ export default function Landing() {
   }, [counterStarted])
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0a0a0c', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative' }}>
 
       {/* ── Cursor Glow ── */}
       <div style={{
         position: 'fixed', width: '500px', height: '500px', borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(232,148,74,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(0,212,255,0.04) 0%, transparent 70%)',
         pointerEvents: 'none', zIndex: 1,
         transform: `translate(${mousePos.x - 250}px, ${mousePos.y - 250}px)`,
         willChange: 'transform', transition: 'transform 0.12s ease-out',
@@ -118,8 +118,8 @@ export default function Landing() {
       {/* ── Navbar ── */}
       <nav className="landing-nav" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
-        background: 'rgba(10,10,12,0.6)', backdropFilter: 'blur(24px) saturate(180%)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)', height: '64px',
+        background: 'rgba(10,10,15,0.6)', backdropFilter: 'blur(24px) saturate(180%)',
+        borderBottom: '1px solid #2A2A3A', height: '64px',
       }}>
         <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 24px', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
@@ -129,9 +129,9 @@ export default function Landing() {
                 <a
                   key={link}
                   href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
-                  style={{ color: 'rgba(255,255,255,0.4)', textDecoration: 'none', fontSize: '13px', fontWeight: 500, transition: 'color 0.2s', letterSpacing: '0.01em' }}
-                  onMouseEnter={e => e.currentTarget.style.color = '#f0ece6'}
-                  onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.4)'}
+                  style={{ color: '#8A8A9A', textDecoration: 'none', fontSize: '13px', fontWeight: 500, transition: 'color 0.2s', letterSpacing: '0.01em' }}
+                  onMouseEnter={e => e.currentTarget.style.color = '#F0F0F5'}
+                  onMouseLeave={e => e.currentTarget.style.color = '#8A8A9A'}
                 >
                   {link}
                 </a>
@@ -142,7 +142,7 @@ export default function Landing() {
             to="/builder"
             className="glow-cta"
             style={{
-              background: 'linear-gradient(135deg, #c05621 0%, #d4662e 100%)',
+              background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '8px 22px', borderRadius: '50px',
               fontSize: '13px', fontWeight: 600, textDecoration: 'none',
               transition: 'all 0.3s', animation: 'glowPulse 3s ease-in-out infinite',
@@ -157,7 +157,7 @@ export default function Landing() {
       {/* ── Hero ── */}
       <section className="dot-grid" style={{ position: 'relative', paddingTop: '140px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px', overflow: 'hidden' }}>
         {/* Ambient glow */}
-        <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(192,86,33,0.1) 0%, transparent 60%)', pointerEvents: 'none', animation: 'glow 5s ease-in-out infinite' }} />
+        <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, rgba(123,97,255,0.06) 40%, transparent 60%)', pointerEvents: 'none', animation: 'glow 5s ease-in-out infinite' }} />
 
         <div className="hero-content" style={{ position: 'relative', zIndex: 2 }}>
           {/* Left: Text */}
@@ -165,11 +165,11 @@ export default function Landing() {
             {/* Badge */}
             <div className="reveal" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
-              fontSize: '11px', fontWeight: 700, color: '#e8944a',
-              background: 'rgba(192,86,33,0.08)', padding: '6px 16px', borderRadius: '50px',
+              fontSize: '11px', fontWeight: 700, color: '#00D4FF',
+              background: 'rgba(0,212,255,0.08)', padding: '6px 16px', borderRadius: '50px',
               marginBottom: '28px', letterSpacing: '0.08em', textTransform: 'uppercase',
-              border: '1px solid rgba(232,148,74,0.15)',
-              boxShadow: '0 0 20px rgba(192,86,33,0.1)',
+              border: '1px solid rgba(0,212,255,0.15)',
+              boxShadow: '0 0 20px rgba(0,212,255,0.1)',
             }}>
               <svg style={{ width: '12px', height: '12px' }} fill="currentColor" viewBox="0 0 24 24"><path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" /></svg>
               Free &amp; Open Source
@@ -178,15 +178,15 @@ export default function Landing() {
             {/* Headline */}
             <h1 className="reveal reveal-d1" style={{
               fontSize: 'clamp(2.6rem, 6.5vw, 4.2rem)', fontWeight: 800,
-              color: '#f0ece6', lineHeight: 1.06, letterSpacing: '-0.04em',
-              fontFamily: "'Space Grotesk', 'Inter', sans-serif",
+              color: '#F0F0F5', lineHeight: 1.06, letterSpacing: '-0.04em',
+              fontFamily: "'DM Sans', 'Inter', sans-serif",
             }}>
               <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both' }}>Your resume</span>
               <br />
               <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s both' }}>should&nbsp;</span>
               <span style={{
                 display: 'inline-block',
-                background: 'linear-gradient(135deg, #e8944a 0%, #c05621 40%, #e8944a 80%, #c05621 100%)',
+                background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 40%, #00D4FF 80%, #7B61FF 100%)',
                 backgroundSize: '250% auto',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
@@ -198,7 +198,7 @@ export default function Landing() {
 
             {/* Subtext */}
             <p className="reveal reveal-d2" style={{
-              marginTop: '24px', fontSize: '16px', color: 'rgba(255,255,255,0.4)',
+              marginTop: '24px', fontSize: '16px', color: '#8A8A9A',
               lineHeight: 1.8, maxWidth: '420px',
             }}>
               Pick a template, fill in your details, download a polished PDF — in minutes, not hours.
@@ -211,14 +211,14 @@ export default function Landing() {
                 className="glow-cta"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '10px',
-                  background: 'linear-gradient(135deg, #c05621 0%, #d4662e 100%)',
+                  background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
                   color: '#fff', padding: '14px 32px', borderRadius: '14px',
                   fontSize: '15px', fontWeight: 700, textDecoration: 'none',
-                  boxShadow: '0 0 40px rgba(192,86,33,0.3), 0 4px 16px rgba(192,86,33,0.2)',
+                  boxShadow: '0 0 40px rgba(0,212,255,0.25), 0 4px 16px rgba(0,212,255,0.15)',
                   transition: 'all 0.3s',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 60px rgba(192,86,33,0.4), 0 8px 24px rgba(192,86,33,0.3)' }}
-                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 40px rgba(192,86,33,0.3), 0 4px 16px rgba(192,86,33,0.2)' }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 60px rgba(0,212,255,0.35), 0 8px 24px rgba(0,212,255,0.25)' }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 40px rgba(0,212,255,0.25), 0 4px 16px rgba(0,212,255,0.15)' }}
               >
                 Start building
                 <svg className="arrow-icon" style={{ width: '16px', height: '16px', transition: 'transform 0.3s' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -229,13 +229,13 @@ export default function Landing() {
                 href="#how-it-works"
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '8px',
-                  color: 'rgba(255,255,255,0.5)', padding: '14px 28px', borderRadius: '14px',
+                  color: '#8A8A9A', padding: '14px 28px', borderRadius: '14px',
                   fontSize: '15px', fontWeight: 600, textDecoration: 'none',
-                  border: '1px solid rgba(255,255,255,0.08)', transition: 'all 0.3s',
+                  border: '1px solid #2A2A3A', transition: 'all 0.3s',
                   background: 'rgba(255,255,255,0.02)',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.color = '#f0ece6'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.boxShadow = '0 0 30px rgba(255,255,255,0.03)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.boxShadow = 'none' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.15)'; e.currentTarget.style.color = '#F0F0F5'; e.currentTarget.style.background = 'rgba(255,255,255,0.05)'; e.currentTarget.style.boxShadow = '0 0 30px rgba(0,212,255,0.06)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#2A2A3A'; e.currentTarget.style.color = '#8A8A9A'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.boxShadow = 'none' }}
               >
                 How it works
               </a>
@@ -249,8 +249,8 @@ export default function Landing() {
                 { value: '100%', label: 'Free forever' },
               ].map((stat, i) => (
                 <div key={i}>
-                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#e8944a', fontFamily: "'Space Grotesk', sans-serif", letterSpacing: '-0.03em' }}>{stat.value}</div>
-                  <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '2px', letterSpacing: '0.02em' }}>{stat.label}</div>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#00D4FF', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '-0.03em' }}>{stat.value}</div>
+                  <div style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '2px', letterSpacing: '0.02em' }}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -262,14 +262,14 @@ export default function Landing() {
             <div style={{
               position: 'absolute', top: '24px', left: '-16px',
               width: '280px', height: '380px', background: 'rgba(255,255,255,0.03)',
-              borderRadius: '8px', border: '1px solid rgba(255,255,255,0.04)',
+              borderRadius: '8px', border: '1px solid #2A2A3A',
               transform: 'rotateY(-10deg) rotateX(4deg)',
             }} />
             {/* Main card */}
             <div style={{
               position: 'relative', width: '280px', minHeight: '380px',
               background: '#fff', borderRadius: '8px',
-              boxShadow: '0 50px 100px rgba(0,0,0,0.5), 0 0 60px rgba(232,148,74,0.06)',
+              boxShadow: '0 50px 100px rgba(0,0,0,0.5), 0 0 60px rgba(0,212,255,0.06)',
               animation: 'float 6s ease-in-out infinite',
               padding: '24px', zIndex: 2, overflow: 'hidden',
             }}>
@@ -278,25 +278,25 @@ export default function Landing() {
                 <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'linear-gradient(135deg, #e8e4df, #d4cfc9)' }} />
                 <div>
                   <div style={{ height: '7px', width: '90px', background: '#1a1a1a', borderRadius: '4px', marginBottom: '4px' }} />
-                  <div style={{ height: '5px', width: '60px', background: '#e8944a', borderRadius: '3px' }} />
+                  <div style={{ height: '5px', width: '60px', background: '#00D4FF', borderRadius: '3px' }} />
                 </div>
               </div>
               {/* Fake section */}
-              <div style={{ height: '5px', width: '55px', background: '#1e3a5f', borderRadius: '3px', marginBottom: '8px' }} />
+              <div style={{ height: '5px', width: '55px', background: '#7B61FF', borderRadius: '3px', marginBottom: '8px' }} />
               {[100, 85, 92, 75].map((w, i) => (
                 <div key={i} style={{ height: '3.5px', width: `${w}%`, background: '#f0f0f0', borderRadius: '2px', marginBottom: '4px' }} />
               ))}
-              <div style={{ marginTop: '12px', height: '5px', width: '48px', background: '#1e3a5f', borderRadius: '3px', marginBottom: '8px' }} />
+              <div style={{ marginTop: '12px', height: '5px', width: '48px', background: '#7B61FF', borderRadius: '3px', marginBottom: '8px' }} />
               {[90, 100, 70, 95, 80].map((w, i) => (
                 <div key={i} style={{ height: '3.5px', width: `${w}%`, background: '#f0f0f0', borderRadius: '2px', marginBottom: '4px' }} />
               ))}
-              <div style={{ marginTop: '12px', height: '5px', width: '40px', background: '#1e3a5f', borderRadius: '3px', marginBottom: '8px' }} />
+              <div style={{ marginTop: '12px', height: '5px', width: '40px', background: '#7B61FF', borderRadius: '3px', marginBottom: '8px' }} />
               <div style={{ display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
                 {[36, 44, 32, 48, 28, 40].map((w, i) => (
                   <div key={i} style={{ height: '10px', width: `${w}px`, background: '#f5f5f5', borderRadius: '4px' }} />
                 ))}
               </div>
-              <div style={{ marginTop: '12px', height: '5px', width: '52px', background: '#1e3a5f', borderRadius: '3px', marginBottom: '8px' }} />
+              <div style={{ marginTop: '12px', height: '5px', width: '52px', background: '#7B61FF', borderRadius: '3px', marginBottom: '8px' }} />
               {[95, 88, 100].map((w, i) => (
                 <div key={i} style={{ height: '3.5px', width: `${w}%`, background: '#f0f0f0', borderRadius: '2px', marginBottom: '4px' }} />
               ))}
@@ -306,11 +306,11 @@ export default function Landing() {
       </section>
 
       {/* ── Features ── */}
-      <section id="features" style={{ padding: '100px 24px', background: '#0a0a0c' }}>
+      <section id="features" style={{ padding: '100px 24px', background: '#0A0A0F' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="reveal" style={{ maxWidth: '400px', marginBottom: '48px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#e8944a', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Features</p>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#f0ece6', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Features</p>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Resume building,<br />reimagined.
             </h2>
           </div>
@@ -322,26 +322,27 @@ export default function Landing() {
                 style={{
                   gridColumn: `span ${f.span}`,
                   padding: '28px', borderRadius: '16px',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid #2A2A3A',
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(12px)',
                   transition: 'all 0.4s', cursor: 'default',
                   position: 'relative', overflow: 'hidden',
                 }}
-                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(232,148,74,0.2)'; e.currentTarget.style.background = 'rgba(255,255,255,0.035)'; e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 20px 50px rgba(232,148,74,0.04)' }}
-                onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)'; e.currentTarget.style.background = 'rgba(255,255,255,0.02)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)'; e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.transform = 'translateY(-3px)'; e.currentTarget.style.boxShadow = '0 20px 50px rgba(0,212,255,0.04)' }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = '#2A2A3A'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none' }}
               >
                 <div style={{
                   width: '40px', height: '40px', borderRadius: '10px',
-                  background: 'rgba(192,86,33,0.08)', border: '1px solid rgba(192,86,33,0.12)',
+                  background: 'rgba(0,212,255,0.08)', border: '1px solid rgba(0,212,255,0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '16px',
                 }}>
-                  <svg style={{ width: '18px', height: '18px', color: '#e8944a' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <svg style={{ width: '18px', height: '18px', color: '#00D4FF' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={f.icon} />
                     {f.icon2 && <path strokeLinecap="round" strokeLinejoin="round" d={f.icon2} />}
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#f0ece6', marginBottom: '8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
-                <p style={{ color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, fontSize: '14px' }}>{f.desc}</p>
+                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
+                <p style={{ color: '#8A8A9A', lineHeight: 1.65, fontSize: '14px' }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -349,11 +350,11 @@ export default function Landing() {
       </section>
 
       {/* ── How It Works ── */}
-      <section id="how-it-works" style={{ padding: '100px 24px', background: '#0c0c0e' }}>
+      <section id="how-it-works" style={{ padding: '100px 24px', background: '#13131A' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#e8944a', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>How It Works</p>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#f0ece6', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>How It Works</p>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Three steps. Five minutes.
             </h2>
           </div>
@@ -362,24 +363,24 @@ export default function Landing() {
             <div className="step-line" style={{
               position: 'absolute', top: '52px', left: '16.67%', right: '16.67%',
               height: '1px', transformOrigin: 'left',
-              background: 'linear-gradient(90deg, transparent, rgba(232,148,74,0.25), rgba(232,148,74,0.25), transparent)',
+              background: 'linear-gradient(90deg, transparent, rgba(0,212,255,0.2), rgba(123,97,255,0.2), transparent)',
             }} />
             {steps.map((step, i) => (
               <div key={i} className={`reveal reveal-d${i + 1}`} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(232,148,74,0.05)', lineHeight: 1, fontFamily: "'Space Grotesk', sans-serif", marginBottom: '-8px' }}>
+                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(0,212,255,0.05)', lineHeight: 1, fontFamily: "'JetBrains Mono', monospace", marginBottom: '-8px' }}>
                   {step.num}
                 </div>
                 <div style={{
                   width: '48px', height: '48px', borderRadius: '14px', margin: '0 auto 16px',
-                  background: 'rgba(192,86,33,0.1)', border: '1px solid rgba(192,86,33,0.15)',
+                  background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.15)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
-                  <svg style={{ width: '22px', height: '22px', color: '#e8944a' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <svg style={{ width: '22px', height: '22px', color: '#00D4FF' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#f0ece6', marginBottom: '8px', letterSpacing: '-0.01em' }}>{step.title}</h3>
-                <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.65, maxWidth: '240px', margin: '0 auto' }}>{step.desc}</p>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{step.title}</h3>
+                <p style={{ fontSize: '13px', color: '#8A8A9A', lineHeight: 1.65, maxWidth: '240px', margin: '0 auto' }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -387,14 +388,14 @@ export default function Landing() {
       </section>
 
       {/* ── Templates ── */}
-      <section id="templates" style={{ padding: '100px 24px', background: '#0a0a0c' }}>
+      <section id="templates" style={{ padding: '100px 24px', background: '#0A0A0F' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#e8944a', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Templates</p>
-            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#f0ece6', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
+            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Templates</p>
+            <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Six styles. Zero compromises.
             </h2>
-            <p style={{ marginTop: '14px', color: 'rgba(255,255,255,0.3)', fontSize: '15px', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
+            <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '15px', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
               Designed for readability and ATS compatibility.
             </p>
           </div>
@@ -405,8 +406,9 @@ export default function Landing() {
                 className={`reveal template-card reveal-d${Math.min(i + 1, 5)}`}
                 style={{
                   borderRadius: '16px', overflow: 'hidden',
-                  border: '1px solid rgba(255,255,255,0.05)',
-                  background: 'rgba(255,255,255,0.02)',
+                  border: '1px solid #2A2A3A',
+                  background: 'rgba(255,255,255,0.04)',
+                  backdropFilter: 'blur(12px)',
                   transition: 'all 0.4s', position: 'relative',
                 }}
               >
@@ -441,9 +443,9 @@ export default function Landing() {
                     <Link to="/builder" style={{
                       color: '#fff', fontSize: '13px', fontWeight: 700,
                       padding: '10px 22px', borderRadius: '10px',
-                      background: 'linear-gradient(135deg, #c05621, #d4662e)',
+                      background: 'linear-gradient(135deg, #00D4FF, #7B61FF)',
                       textDecoration: 'none',
-                      boxShadow: '0 0 24px rgba(192,86,33,0.3)',
+                      boxShadow: '0 0 24px rgba(0,212,255,0.3)',
                       display: 'flex', alignItems: 'center', gap: '8px',
                     }}>
                       Use template
@@ -455,8 +457,8 @@ export default function Landing() {
                 </div>
                 <div style={{ padding: '18px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '14px', color: '#f0ece6', letterSpacing: '-0.01em' }}>{t.name}</h3>
-                    <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '12px', marginTop: '3px', lineHeight: 1.4 }}>{t.desc}</p>
+                    <h3 style={{ fontWeight: 700, fontSize: '14px', color: '#F0F0F5', letterSpacing: '-0.01em' }}>{t.name}</h3>
+                    <p style={{ color: '#8A8A9A', fontSize: '12px', marginTop: '3px', lineHeight: 1.4 }}>{t.desc}</p>
                   </div>
                   <span style={{
                     fontSize: '10px', fontWeight: 700, color: t.tagColor,
@@ -474,32 +476,32 @@ export default function Landing() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={{ padding: '120px 24px', background: 'linear-gradient(180deg, #0a0a0c 0%, #140e08 50%, #0a0a0c 100%)', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(192,86,33,0.08) 0%, transparent 60%)', pointerEvents: 'none' }} />
+      <section style={{ padding: '120px 24px', background: 'linear-gradient(180deg, #0A0A0F 0%, #0f0a1a 50%, #0A0A0F 100%)', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '600px', height: '600px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(123,97,255,0.06) 0%, transparent 60%)', pointerEvents: 'none' }} />
         <div className="reveal" style={{
           maxWidth: '580px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1,
           background: 'rgba(255,255,255,0.025)', backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255,255,255,0.06)', borderRadius: '24px',
+          border: '1px solid #2A2A3A', borderRadius: '24px',
           padding: '56px 40px',
         }}>
-          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#f0ece6', letterSpacing: '-0.035em', lineHeight: 1.12, fontFamily: "'Space Grotesk', 'Inter', sans-serif" }}>
+          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', letterSpacing: '-0.035em', lineHeight: 1.12, fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             Your next job starts<br />with a better resume.
           </h2>
-          <p style={{ marginTop: '14px', color: 'rgba(255,255,255,0.3)', fontSize: '15px', lineHeight: 1.7 }}>
+          <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '15px', lineHeight: 1.7 }}>
             Takes five minutes. No account needed. No watermarks.
           </p>
           <Link
             to="/builder"
             style={{
               marginTop: '28px', display: 'inline-flex', alignItems: 'center', gap: '10px',
-              background: 'linear-gradient(135deg, #c05621 0%, #d4662e 100%)',
+              background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '14px 32px', borderRadius: '14px',
               fontSize: '15px', fontWeight: 700, textDecoration: 'none',
-              boxShadow: '0 0 40px rgba(192,86,33,0.3)',
+              boxShadow: '0 0 40px rgba(0,212,255,0.25)',
               transition: 'all 0.3s',
             }}
-            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 60px rgba(192,86,33,0.4)' }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 40px rgba(192,86,33,0.3)' }}
+            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 0 60px rgba(0,212,255,0.35)' }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 0 40px rgba(0,212,255,0.25)' }}
           >
             Build yours now
             <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -514,7 +516,7 @@ export default function Landing() {
       {/* ── Scoped CSS ── */}
       <style>{`
         .dot-grid {
-          background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+          background-image: radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
           background-size: 30px 30px;
         }
         .hero-content {
@@ -527,7 +529,7 @@ export default function Landing() {
         .glow-card::after {
           content: ''; position: absolute; inset: 0; border-radius: inherit;
           padding: 1px;
-          background: linear-gradient(135deg, rgba(232,148,74,0.3), transparent 50%, rgba(232,148,74,0.2));
+          background: linear-gradient(135deg, rgba(0,212,255,0.3), transparent 50%, rgba(123,97,255,0.2));
           -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
           -webkit-mask-composite: xor; mask-composite: exclude;
           opacity: 0; transition: opacity 0.4s; pointer-events: none;
@@ -535,7 +537,7 @@ export default function Landing() {
         .glow-card:hover::after { opacity: 1; }
 
         .template-card { cursor: pointer; }
-        .template-card:hover { border-color: rgba(255,255,255,0.12); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+        .template-card:hover { border-color: rgba(0,212,255,0.15); transform: translateY(-4px); box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
         .template-card:hover .template-preview { transform: scale(1.06); }
         .template-card:hover .template-overlay { opacity: 1 !important; }
 

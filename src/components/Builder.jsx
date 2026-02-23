@@ -61,19 +61,19 @@ export default function Builder() {
   }
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#111113' }}>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F' }}>
       {/* Header */}
       <header style={{
-        background: 'rgba(14,14,16,0.8)', backdropFilter: 'blur(20px) saturate(180%)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)', padding: '0 16px', height: '56px',
+        background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px) saturate(180%)',
+        borderBottom: '1px solid #2A2A3A', padding: '0 16px', height: '56px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px',
         flexShrink: 0, zIndex: 10,
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', overflow: 'auto' }}>
           <Logo />
-          <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: '1px', height: '24px', backgroundColor: '#2A2A3A' }} />
           <TemplateSelector selected={template} onSelect={setTemplate} />
-          <div style={{ width: '1px', height: '24px', backgroundColor: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ width: '1px', height: '24px', backgroundColor: '#2A2A3A' }} />
           <SamplePicker onLoad={handleLoadSample} />
           <AIGenerator onGenerate={(resume) => setData(resume)} />
         </div>
@@ -82,7 +82,7 @@ export default function Builder() {
             onClick={handleReset}
             title="Clear all data"
             style={{ padding: '7px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: 'rgba(255,255,255,0.3)', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#e8944a'; e.currentTarget.style.background = 'rgba(192,86,33,0.1)' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#FF4D6D'; e.currentTarget.style.background = 'rgba(255,77,109,0.1)' }}
             onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.3)'; e.currentTarget.style.background = 'transparent' }}
           >
             <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -103,15 +103,15 @@ export default function Builder() {
             disabled={exporting}
             style={{
               display: 'flex', alignItems: 'center', gap: '8px',
-              background: 'linear-gradient(135deg, #c05621 0%, #d4662e 100%)',
+              background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '9px 20px', borderRadius: '9px',
               fontSize: '13px', fontWeight: 700, border: 'none',
               cursor: exporting ? 'wait' : 'pointer',
-              boxShadow: '0 0 20px rgba(192,86,33,0.25)',
+              boxShadow: '0 0 20px rgba(0,212,255,0.2)',
               opacity: exporting ? 0.7 : 1, transition: 'all 0.2s', letterSpacing: '0.01em',
             }}
-            onMouseEnter={e => { if (!exporting) e.currentTarget.style.boxShadow = '0 0 30px rgba(192,86,33,0.35)' }}
-            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(192,86,33,0.25)'}
+            onMouseEnter={e => { if (!exporting) e.currentTarget.style.boxShadow = '0 0 30px rgba(0,212,255,0.35)' }}
+            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0,212,255,0.2)'}
           >
             {exporting ? (
               <svg style={{ width: '14px', height: '14px', animation: 'spin 1s linear infinite' }} fill="none" viewBox="0 0 24 24">
@@ -132,8 +132,8 @@ export default function Builder() {
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         <div style={{
           width: '460px', flexShrink: 0,
-          background: '#17171a',
-          borderRight: '1px solid rgba(255,255,255,0.06)',
+          background: '#13131A',
+          borderRight: '1px solid #2A2A3A',
           overflowY: 'auto', display: showPreview ? 'none' : 'block',
         }}>
           <ResumeForm data={data} updatePersonal={updatePersonal} updateSection={updateSection} />
@@ -141,7 +141,7 @@ export default function Builder() {
 
         <div
           ref={previewContainerRef}
-          style={{ flex: 1, overflow: 'auto', background: '#1c1c1f', display: !showPreview ? undefined : 'block', padding: '32px' }}
+          style={{ flex: 1, overflow: 'auto', background: '#1C1C28', display: !showPreview ? undefined : 'block', padding: '32px' }}
         >
           <ResumePreview data={data} template={template} previewRef={previewRef} scale={previewScale} />
         </div>

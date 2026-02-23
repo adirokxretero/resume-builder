@@ -25,13 +25,13 @@ export default function SamplePicker({ onLoad }) {
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
           padding: '6px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
-          cursor: 'pointer', border: '1px solid rgba(255,255,255,0.06)',
+          cursor: 'pointer', border: '1px solid #2A2A3A',
           background: open ? 'rgba(255,255,255,0.06)' : 'transparent',
           color: 'rgba(255,255,255,0.4)',
           transition: 'all 0.2s', whiteSpace: 'nowrap',
         }}
-        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)'; e.currentTarget.style.color = 'rgba(255,255,255,0.6)' }}
-        onMouseLeave={e => { if (!open) { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.06)'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)' } }}
+        onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; e.currentTarget.style.color = 'rgba(255,255,255,0.6)' }}
+        onMouseLeave={e => { if (!open) { e.currentTarget.style.borderColor = '#2A2A3A'; e.currentTarget.style.color = 'rgba(255,255,255,0.4)' } }}
       >
         <svg style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
@@ -45,13 +45,13 @@ export default function SamplePicker({ onLoad }) {
       {open && (
         <div style={{
           position: 'absolute', top: 'calc(100% + 8px)', left: 0,
-          background: '#1c1c1f', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.08)',
+          background: '#1C1C28', borderRadius: '14px', border: '1px solid #2A2A3A',
           boxShadow: '0 20px 60px rgba(0,0,0,0.5)', width: '300px', zIndex: 100,
           overflow: 'hidden', animation: 'dropIn 0.15s ease-out',
         }}>
-          <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-            <p style={{ fontSize: '13px', fontWeight: 700, color: '#f0ece6' }}>Load an example</p>
-            <p style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '3px' }}>See how templates look with real data</p>
+          <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid #2A2A3A' }}>
+            <p style={{ fontSize: '13px', fontWeight: 700, color: '#F0F0F5' }}>Load an example</p>
+            <p style={{ fontSize: '11px', color: '#8A8A9A', marginTop: '3px' }}>See how templates look with real data</p>
           </div>
           <div style={{ padding: '6px' }}>
             {sampleResumes.map(sample => (
@@ -63,7 +63,7 @@ export default function SamplePicker({ onLoad }) {
                   padding: '10px', border: 'none', background: 'transparent',
                   borderRadius: '10px', cursor: 'pointer', textAlign: 'left', transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'}
+                onMouseEnter={e => e.currentTarget.style.background = 'rgba(0,212,255,0.04)'}
                 onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
                 <div style={{
@@ -73,8 +73,8 @@ export default function SamplePicker({ onLoad }) {
                   {sample.emoji}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#f0ece6' }}>{sample.data.personal.name}</div>
-                  <div style={{ fontSize: '11px', color: 'rgba(255,255,255,0.3)', marginTop: '1px' }}>{sample.label}</div>
+                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#F0F0F5' }}>{sample.data.personal.name}</div>
+                  <div style={{ fontSize: '11px', color: '#8A8A9A', marginTop: '1px' }}>{sample.label}</div>
                 </div>
                 <svg style={{ width: '12px', height: '12px', color: 'rgba(255,255,255,0.15)', flexShrink: 0 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
