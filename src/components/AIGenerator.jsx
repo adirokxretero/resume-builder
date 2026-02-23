@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
-const STORAGE_KEY = 'resumeforge-cohere-key'
+const API_KEY = import.meta.env.VITE_COHERE_API_KEY || ''
 
 const systemPrompt = `You are a professional resume writer. The user will describe what kind of resume they want. Generate realistic, professional resume content in JSON format.
 
@@ -61,30 +61,23 @@ Rules:
 
 export default function AIGenerator({ onGenerate }) {
   const [open, setOpen] = useState(false)
-  const [apiKey, setApiKey] = useState('')
   const [prompt, setPrompt] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    if (saved) setApiKey(saved)
-  }, [])
-
   const handleGenerate = async () => {
-    if (!apiKey.trim()) { setError('Please enter your Cohere API key'); return }
-    if (!prompt.trim()) { setError('Please describe the resume you want'); return }
+    if (!prompt.trim()) { setError('Describe the resume you want first'); return }
+    if (!API_KEY) { setError('AI generation is not configured. Contact the site owner.'); return }
 
     setError('')
     setLoading(true)
-    localStorage.setItem(STORAGE_KEY, apiKey.trim())
 
     try {
       const res = await fetch('https://api.cohere.ai/v2/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey.trim()}`,
+          'Authorization': `Bearer ${API_KEY}`,
           'Accept': 'application/json',
         },
         body: JSON.stringify({
@@ -98,19 +91,19 @@ export default function AIGenerator({ onGenerate }) {
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}))
-        throw new Error(errData.message || `API error ${res.status}: ${res.statusText}`)
+        throw new Error(errData.message || `Something went wrong (${res.status}). Try again.`)
       }
 
       const data = await res.json()
       const text = data.message?.content?.[0]?.text || ''
 
       const jsonMatch = text.match(/\{[\s\S]*\}/)
-      if (!jsonMatch) throw new Error('AI did not return valid JSON. Try again.')
+      if (!jsonMatch) throw new Error('Generation failed. Please try again with a different description.')
 
       const resume = JSON.parse(jsonMatch[0])
 
       if (!resume.personal || !resume.skills || !resume.education || !resume.experience) {
-        throw new Error('Generated data is missing required sections. Try again.')
+        throw new Error('Incomplete result. Try again with more detail in your description.')
       }
 
       onGenerate(resume)
@@ -172,7 +165,7 @@ export default function AIGenerator({ onGenerate }) {
               AI Resume Generator
             </h2>
             <p style={{ fontSize: '13px', color: '#a3a098', marginTop: '4px' }}>
-              Powered by Cohere — describe what you want
+              Describe what you need — we'll write the rest
             </p>
           </div>
           <button
@@ -187,33 +180,6 @@ export default function AIGenerator({ onGenerate }) {
 
         {/* Body */}
         <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {/* API Key */}
-          <div>
-            <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#6b6560', marginBottom: '6px' }}>
-              Cohere API Key
-            </label>
-            <input
-              type="password"
-              value={apiKey}
-              onChange={e => setApiKey(e.target.value)}
-              placeholder="Paste your key from dashboard.cohere.com"
-              style={{
-                width: '100%', padding: '10px 13px', backgroundColor: '#fff',
-                border: '1.5px solid #e2ddd7', borderRadius: '10px', fontSize: '13px',
-                color: '#2c2c2c', outline: 'none', fontFamily: 'inherit', transition: 'border-color 0.2s',
-              }}
-              onFocus={e => e.target.style.borderColor = '#c05621'}
-              onBlur={e => e.target.style.borderColor = '#e2ddd7'}
-            />
-            <p style={{ fontSize: '11px', color: '#a3a098', marginTop: '4px' }}>
-              Get a free key at{' '}
-              <a href="https://dashboard.cohere.com/api-keys" target="_blank" rel="noreferrer" style={{ color: '#c05621', textDecoration: 'underline' }}>
-                dashboard.cohere.com/api-keys
-              </a>
-              {' '}— stored locally in your browser only.
-            </p>
-          </div>
-
           {/* Prompt */}
           <div>
             <label style={{ display: 'block', fontSize: '12px', fontWeight: 600, color: '#6b6560', marginBottom: '6px' }}>
