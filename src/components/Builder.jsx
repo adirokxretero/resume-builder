@@ -34,14 +34,13 @@ export default function Builder() {
     setExporting(true)
     try {
       const html2pdf = (await import('html2pdf.js')).default
-      const element = previewRef.current
       await html2pdf().set({
         margin: 0,
         filename: `${data.personal.name || 'resume'}-resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, logging: false },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }).from(element).save()
+      }).from(previewRef.current).save()
     } catch (err) {
       console.error('PDF export failed:', err)
     } finally {
@@ -50,47 +49,48 @@ export default function Builder() {
   }, [data.personal.name, exporting])
 
   const handleReset = () => {
-    if (window.confirm('Are you sure you want to clear all data? This cannot be undone.')) {
-      resetData()
-    }
+    if (window.confirm('Clear all data? This cannot be undone.')) resetData()
   }
 
   const handleLoadSample = (sample) => {
-    if (window.confirm(`Load "${sample.data.personal.name}" example? This will replace your current data.`)) {
+    if (window.confirm(`Load "${sample.data.personal.name}" example? This replaces your current data.`)) {
       setData(sample.data)
       setTemplate(sample.template)
     }
   }
 
   return (
-    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#f1f5f9' }}>
-      {/* Top Bar */}
-      <header style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '0 20px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexShrink: 0, zIndex: 10, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#f5f0eb' }}>
+      {/* Header */}
+      <header style={{
+        background: '#faf9f6', borderBottom: '1px solid #e2ddd7', padding: '0 20px', height: '58px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '12px',
+        flexShrink: 0, zIndex: 10,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
           <Logo />
-          <div style={{ width: '1px', height: '28px', backgroundColor: '#e2e8f0' }} />
+          <div style={{ width: '1px', height: '26px', backgroundColor: '#e2ddd7' }} />
           <TemplateSelector selected={template} onSelect={setTemplate} />
-          <div style={{ width: '1px', height: '28px', backgroundColor: '#e2e8f0' }} />
+          <div style={{ width: '1px', height: '26px', backgroundColor: '#e2ddd7' }} />
           <SamplePicker onLoad={handleLoadSample} />
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <button
             onClick={handleReset}
             title="Clear all data"
-            style={{ padding: '8px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}
-            onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
-            onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'transparent' }}
+            style={{ padding: '7px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#a3a098', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#c05621'; e.currentTarget.style.background = '#fdf2ec' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#a3a098'; e.currentTarget.style.background = 'transparent' }}
           >
-            <svg style={{ width: '18px', height: '18px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg style={{ width: '17px', height: '17px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
           </button>
 
-          {/* Mobile preview toggle */}
           <button
             onClick={() => setShowPreview(!showPreview)}
             className="mobile-toggle"
-            style={{ padding: '8px 14px', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontSize: '13px', fontWeight: 600, color: '#475569', display: 'none' }}
+            style={{ padding: '7px 13px', borderRadius: '8px', border: '1.5px solid #e2ddd7', background: '#fff', cursor: 'pointer', fontSize: '13px', fontWeight: 600, color: '#6b6560', display: 'none' }}
           >
             {showPreview ? 'Edit' : 'Preview'}
           </button>
@@ -98,17 +98,24 @@ export default function Builder() {
           <button
             onClick={handleExportPDF}
             disabled={exporting}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#2563eb', color: '#fff', padding: '9px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: 600, border: 'none', cursor: exporting ? 'wait' : 'pointer', boxShadow: '0 1px 3px rgba(37,99,235,0.3)', opacity: exporting ? 0.7 : 1, transition: 'all 0.2s' }}
-            onMouseEnter={e => { if (!exporting) e.currentTarget.style.backgroundColor = '#1d4ed8' }}
-            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#2563eb'}
+            style={{
+              display: 'flex', alignItems: 'center', gap: '8px',
+              backgroundColor: '#c05621', color: '#fff', padding: '9px 18px', borderRadius: '9px',
+              fontSize: '13px', fontWeight: 700, border: 'none',
+              cursor: exporting ? 'wait' : 'pointer',
+              boxShadow: '0 2px 8px rgba(192,86,33,0.25)',
+              opacity: exporting ? 0.7 : 1, transition: 'all 0.2s', letterSpacing: '-0.01em',
+            }}
+            onMouseEnter={e => { if (!exporting) e.currentTarget.style.backgroundColor = '#a84a1c' }}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#c05621'}
           >
             {exporting ? (
-              <svg style={{ width: '16px', height: '16px', animation: 'spin 1s linear infinite' }} fill="none" viewBox="0 0 24 24">
+              <svg style={{ width: '15px', height: '15px', animation: 'spin 1s linear infinite' }} fill="none" viewBox="0 0 24 24">
                 <circle style={{ opacity: 0.25 }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                 <path style={{ opacity: 0.75 }} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             ) : (
-              <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>
             )}
@@ -117,32 +124,18 @@ export default function Builder() {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Body */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
-        {/* Form Panel */}
-        <div
-          style={{
-            width: '460px',
-            flexShrink: 0,
-            background: '#ffffff',
-            borderRight: '1px solid #e2e8f0',
-            overflowY: 'auto',
-            display: showPreview ? 'none' : 'block',
-          }}
-        >
+        <div style={{
+          width: '460px', flexShrink: 0, background: '#faf9f6', borderRight: '1px solid #e2ddd7',
+          overflowY: 'auto', display: showPreview ? 'none' : 'block',
+        }}>
           <ResumeForm data={data} updatePersonal={updatePersonal} updateSection={updateSection} />
         </div>
 
-        {/* Preview Panel */}
         <div
           ref={previewContainerRef}
-          style={{
-            flex: 1,
-            overflow: 'auto',
-            background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
-            display: !showPreview ? undefined : 'block',
-            padding: '32px',
-          }}
+          style={{ flex: 1, overflow: 'auto', background: '#e8e2db', display: !showPreview ? undefined : 'block', padding: '32px' }}
         >
           <ResumePreview data={data} template={template} previewRef={previewRef} scale={previewScale} />
         </div>
@@ -150,9 +143,7 @@ export default function Builder() {
 
       <style>{`
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @media (max-width: 768px) {
-          .mobile-toggle { display: flex !important; }
-        }
+        @media (max-width: 768px) { .mobile-toggle { display: flex !important; } }
       `}</style>
     </div>
   )

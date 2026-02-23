@@ -9,25 +9,14 @@ const sectionTabs = [
 ]
 
 const inputStyle = {
-  width: '100%',
-  padding: '10px 14px',
-  backgroundColor: '#f8fafc',
-  border: '1.5px solid #e2e8f0',
-  borderRadius: '10px',
-  fontSize: '14px',
-  color: '#1e293b',
-  outline: 'none',
-  transition: 'all 0.2s',
-  fontFamily: 'inherit',
+  width: '100%', padding: '10px 13px',
+  backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px',
+  fontSize: '14px', color: '#2c2c2c', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
 }
 
 const labelStyle = {
-  display: 'block',
-  fontSize: '12px',
-  fontWeight: 600,
-  color: '#475569',
-  marginBottom: '6px',
-  letterSpacing: '0.02em',
+  display: 'block', fontSize: '12px', fontWeight: 600,
+  color: '#6b6560', marginBottom: '6px', letterSpacing: '0.01em',
 }
 
 function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
@@ -35,13 +24,10 @@ function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
     <div>
       <label style={labelStyle}>{label}</label>
       <input
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
+        type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
-        onFocus={e => { e.target.style.borderColor = '#93c5fd'; e.target.style.backgroundColor = '#fff'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)' }}
-        onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.backgroundColor = '#f8fafc'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = '#c05621'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.08)' }}
+        onBlur={e => { e.target.style.borderColor = '#e2ddd7'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -52,13 +38,10 @@ function Textarea({ label, value, onChange, placeholder = '', rows = 3 }) {
     <div>
       <label style={labelStyle}>{label}</label>
       <textarea
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        rows={rows}
+        value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         style={{ ...inputStyle, resize: 'none', lineHeight: 1.6 }}
-        onFocus={e => { e.target.style.borderColor = '#93c5fd'; e.target.style.backgroundColor = '#fff'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)' }}
-        onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.backgroundColor = '#f8fafc'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = '#c05621'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.08)' }}
+        onBlur={e => { e.target.style.borderColor = '#e2ddd7'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -68,11 +51,16 @@ function AddButton({ onClick, label }) {
   return (
     <button
       onClick={onClick}
-      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#2563eb', fontWeight: 600, background: 'none', border: '1.5px dashed #bfdbfe', padding: '10px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s', width: '100%', justifyContent: 'center' }}
-      onMouseEnter={e => { e.currentTarget.style.background = '#eff6ff'; e.currentTarget.style.borderColor = '#93c5fd' }}
-      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = '#bfdbfe' }}
+      style={{
+        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px',
+        color: '#c05621', fontWeight: 600, background: 'none', border: '1.5px dashed #e0c8b8',
+        padding: '10px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
+        width: '100%', justifyContent: 'center',
+      }}
+      onMouseEnter={e => { e.currentTarget.style.background = '#fdf2ec'; e.currentTarget.style.borderColor = '#c05621' }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = '#e0c8b8' }}
     >
-      <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
       {label}
@@ -84,11 +72,11 @@ function DeleteButton({ onClick }) {
   return (
     <button
       onClick={onClick}
-      style={{ position: 'absolute', top: '12px', right: '12px', padding: '6px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', transition: 'all 0.2s', display: 'flex' }}
-      onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
-      onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'transparent' }}
+      style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#a3a098', transition: 'all 0.2s', display: 'flex' }}
+      onMouseEnter={e => { e.currentTarget.style.color = '#c05621'; e.currentTarget.style.background = '#fdf2ec' }}
+      onMouseLeave={e => { e.currentTarget.style.color = '#a3a098'; e.currentTarget.style.background = 'transparent' }}
     >
-      <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -96,14 +84,8 @@ function DeleteButton({ onClick }) {
 }
 
 const cardStyle = {
-  backgroundColor: '#f8fafc',
-  border: '1.5px solid #e2e8f0',
-  borderRadius: '14px',
-  padding: '20px',
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '14px',
+  backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '14px',
+  padding: '20px', position: 'relative', display: 'flex', flexDirection: 'column', gap: '14px',
 }
 
 function PersonalSection({ data, updatePersonal }) {
@@ -116,15 +98,14 @@ function PersonalSection({ data, updatePersonal }) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
-      {/* Photo Upload */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px', background: '#f8fafc', borderRadius: '14px', border: '1.5px solid #e2e8f0' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '18px', background: '#fff', borderRadius: '14px', border: '1.5px solid #e2ddd7' }}>
         <div style={{ position: 'relative' }}>
-          <div style={{ width: '72px', height: '72px', borderRadius: '50%', backgroundColor: '#e2e8f0', border: '2px dashed #cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
+          <div style={{ width: '68px', height: '68px', borderRadius: '50%', backgroundColor: '#f5f0eb', border: '2px dashed #d4cfc9', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
             {data.photo ? (
               <img src={data.photo} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
-              <svg style={{ width: '28px', height: '28px', color: '#94a3b8' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg style={{ width: '26px', height: '26px', color: '#a3a098' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
               </svg>
@@ -135,18 +116,16 @@ function PersonalSection({ data, updatePersonal }) {
           </label>
         </div>
         <div>
-          <p style={{ fontSize: '14px', fontWeight: 600, color: '#334155' }}>Profile Photo</p>
-          <p style={{ fontSize: '12px', color: '#94a3b8', marginTop: '2px' }}>Click to upload (optional)</p>
+          <p style={{ fontSize: '14px', fontWeight: 600, color: '#2c2c2c' }}>Profile Photo</p>
+          <p style={{ fontSize: '12px', color: '#a3a098', marginTop: '2px' }}>Click circle to upload</p>
           {data.photo && (
-            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '12px', color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 500 }}>
-              Remove photo
+            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '12px', color: '#c05621', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 500 }}>
+              Remove
             </button>
           )}
         </div>
       </div>
-
-      {/* Fields */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
         <Input label="Full Name" value={data.name} onChange={v => updatePersonal('name', v)} placeholder="John Doe" />
         <Input label="Job Title" value={data.title} onChange={v => updatePersonal('title', v)} placeholder="Software Engineer" />
         <Input label="Email" value={data.email} onChange={v => updatePersonal('email', v)} type="email" placeholder="john@example.com" />
@@ -157,7 +136,7 @@ function PersonalSection({ data, updatePersonal }) {
           <Input label="LinkedIn" value={data.linkedin} onChange={v => updatePersonal('linkedin', v)} placeholder="linkedin.com/in/johndoe" />
         </div>
       </div>
-      <Textarea label="Professional Summary" value={data.summary} onChange={v => updatePersonal('summary', v)} rows={4} placeholder="A brief summary of your professional background, strengths, and career goals..." />
+      <Textarea label="Professional Summary" value={data.summary} onChange={v => updatePersonal('summary', v)} rows={4} placeholder="A brief summary of your background, strengths, and goals..." />
     </div>
   )
 }
@@ -168,27 +147,19 @@ function SkillsSection({ skills, onChange }) {
   const updateSkill = (idx, val) => onChange(skills.map((s, i) => i === idx ? val : s))
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>Add your technical and soft skills. These appear as tags on your resume.</p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+      <p style={{ fontSize: '13px', color: '#6b6560', lineHeight: 1.5 }}>Add your skills — they show up as tags on the resume.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
-              value={skill}
-              onChange={e => updateSkill(i, e.target.value)}
-              placeholder="Enter skill..."
-              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '120px', color: '#1e293b', fontFamily: 'inherit' }}
+              value={skill} onChange={e => updateSkill(i, e.target.value)} placeholder="Type skill..."
+              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#2c2c2c', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
-              <button
-                onClick={() => removeSkill(i)}
-                style={{ padding: '4px', color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.2s' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
-                onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'none' }}
-              >
-                <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
+              <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: '#a3a098', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#c05621' }} onMouseLeave={e => { e.currentTarget.style.color = '#a3a098' }}>
+                <svg style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             )}
           </div>
@@ -203,13 +174,12 @@ function EducationSection({ education, onChange }) {
   const addEntry = () => onChange([...education, { institution: '', degree: '', field: '', startDate: '', endDate: '', gpa: '' }])
   const removeEntry = (idx) => onChange(education.filter((_, i) => i !== idx))
   const updateEntry = (idx, field, val) => onChange(education.map((e, i) => i === idx ? { ...e, [field]: val } : e))
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
       {education.map((edu, i) => (
         <div key={i} style={cardStyle}>
           {education.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <Input label="Institution" value={edu.institution} onChange={v => updateEntry(i, 'institution', v)} placeholder="MIT" />
             <Input label="Degree" value={edu.degree} onChange={v => updateEntry(i, 'degree', v)} placeholder="Bachelor of Science" />
             <Input label="Field of Study" value={edu.field} onChange={v => updateEntry(i, 'field', v)} placeholder="Computer Science" />
@@ -228,30 +198,26 @@ function ExperienceSection({ experience, onChange }) {
   const addEntry = () => onChange([...experience, { company: '', position: '', startDate: '', endDate: '', current: false, description: '' }])
   const removeEntry = (idx) => onChange(experience.filter((_, i) => i !== idx))
   const updateEntry = (idx, field, val) => onChange(experience.map((e, i) => i === idx ? { ...e, [field]: val } : e))
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
       {experience.map((exp, i) => (
         <div key={i} style={cardStyle}>
           {experience.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <Input label="Company" value={exp.company} onChange={v => updateEntry(i, 'company', v)} placeholder="Google" />
             <Input label="Position" value={exp.position} onChange={v => updateEntry(i, 'position', v)} placeholder="Senior Engineer" />
             <Input label="Start Date" value={exp.startDate} onChange={v => updateEntry(i, 'startDate', v)} placeholder="Jan 2022" />
             <div>
               <Input label="End Date" value={exp.current ? '' : exp.endDate} onChange={v => updateEntry(i, 'endDate', v)} placeholder="Present" />
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', cursor: 'pointer' }}>
-                <input
-                  type="checkbox"
-                  checked={exp.current}
+                <input type="checkbox" checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
-                  style={{ width: '16px', height: '16px', accentColor: '#2563eb' }}
-                />
-                <span style={{ fontSize: '12px', color: '#64748b' }}>Currently working here</span>
+                  style={{ width: '15px', height: '15px', accentColor: '#c05621' }} />
+                <span style={{ fontSize: '12px', color: '#6b6560' }}>Currently here</span>
               </label>
             </div>
           </div>
-          <Textarea label="Description" value={exp.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="Describe your responsibilities and achievements..." />
+          <Textarea label="Description" value={exp.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="What did you do? What was the impact?" />
         </div>
       ))}
       <AddButton onClick={addEntry} label="Add Experience" />
@@ -263,20 +229,19 @@ function ProjectsSection({ projects, onChange }) {
   const addEntry = () => onChange([...projects, { name: '', description: '', technologies: '', link: '' }])
   const removeEntry = (idx) => onChange(projects.filter((_, i) => i !== idx))
   const updateEntry = (idx, field, val) => onChange(projects.map((e, i) => i === idx ? { ...e, [field]: val } : e))
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
       {projects.map((proj, i) => (
         <div key={i} style={cardStyle}>
           {projects.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <Input label="Project Name" value={proj.name} onChange={v => updateEntry(i, 'name', v)} placeholder="E-Commerce Platform" />
-            <Input label="Technologies" value={proj.technologies} onChange={v => updateEntry(i, 'technologies', v)} placeholder="React, Node.js, PostgreSQL" />
+            <Input label="Technologies" value={proj.technologies} onChange={v => updateEntry(i, 'technologies', v)} placeholder="React, Node.js" />
             <div style={{ gridColumn: 'span 2' }}>
-              <Input label="Link (optional)" value={proj.link} onChange={v => updateEntry(i, 'link', v)} placeholder="https://github.com/..." />
+              <Input label="Link (optional)" value={proj.link} onChange={v => updateEntry(i, 'link', v)} placeholder="github.com/..." />
             </div>
           </div>
-          <Textarea label="Description" value={proj.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="Describe the project, your role, and the impact..." />
+          <Textarea label="Description" value={proj.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="What is this project? What's your role?" />
         </div>
       ))}
       <AddButton onClick={addEntry} label="Add Project" />
@@ -290,7 +255,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '4px', padding: '16px 20px 0', overflowX: 'auto', borderBottom: '1px solid #e2e8f0', backgroundColor: '#fff' }}>
+      <div style={{ display: 'flex', gap: '2px', padding: '14px 18px 0', overflowX: 'auto', borderBottom: '1px solid #e2ddd7', backgroundColor: '#faf9f6' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
@@ -298,24 +263,16 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '10px 16px',
-                fontSize: '13px',
-                fontWeight: 600,
-                whiteSpace: 'nowrap',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-                borderRadius: '8px 8px 0 0',
-                border: 'none',
-                borderBottom: isActive ? '2px solid #2563eb' : '2px solid transparent',
-                background: isActive ? '#eff6ff' : 'transparent',
-                color: isActive ? '#1d4ed8' : '#94a3b8',
-                marginBottom: '-1px',
+                display: 'flex', alignItems: 'center', gap: '6px',
+                padding: '9px 14px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
+                cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
+                border: 'none', marginBottom: '-1px',
+                borderBottom: isActive ? '2px solid #c05621' : '2px solid transparent',
+                background: isActive ? '#fff' : 'transparent',
+                color: isActive ? '#c05621' : '#a3a098',
               }}
             >
-              <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
               </svg>
               {tab.label}
@@ -324,8 +281,8 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
         })}
       </div>
 
-      {/* Form Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
+      {/* Content */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '18px' }}>
         {activeTab === 'personal' && <PersonalSection data={data.personal} updatePersonal={updatePersonal} />}
         {activeTab === 'skills' && <SkillsSection skills={data.skills} onChange={v => updateSection('skills', v)} />}
         {activeTab === 'education' && <EducationSection education={data.education} onChange={v => updateSection('education', v)} />}

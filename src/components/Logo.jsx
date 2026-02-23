@@ -2,12 +2,27 @@ import { Link } from 'react-router-dom'
 
 export default function Logo({ light = false }) {
   return (
-    <Link to="/" className="flex items-center gap-2 no-underline">
-      <div className="w-9 h-9 bg-primary-600 rounded-lg flex items-center justify-center shadow-md">
-        <span className="text-white font-bold text-lg font-display">R</span>
+    <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '9px', textDecoration: 'none' }}>
+      <div style={{
+        width: '34px',
+        height: '34px',
+        background: 'linear-gradient(135deg, #c05621 0%, #e07a5f 100%)',
+        borderRadius: '9px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        boxShadow: '0 2px 8px rgba(192,86,33,0.25)',
+      }}>
+        <span style={{ color: '#fff', fontWeight: 800, fontSize: '16px', fontFamily: "'Space Grotesk', sans-serif", lineHeight: 1 }}>R</span>
       </div>
-      <span className={`text-xl font-display font-bold tracking-tight ${light ? 'text-white' : 'text-surface-800'}`}>
-        Resume<span className="text-primary-600">Forge</span>
+      <span style={{
+        fontSize: '18px',
+        fontFamily: "'Space Grotesk', sans-serif",
+        fontWeight: 700,
+        letterSpacing: '-0.03em',
+        color: light ? '#faf9f6' : '#2c2c2c',
+      }}>
+        Resume<span style={{ color: '#c05621' }}>Forge</span>
       </span>
     </Link>
   )
