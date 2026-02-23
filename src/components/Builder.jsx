@@ -55,18 +55,35 @@ export default function Builder() {
   const handleExportPDF = useCallback(async () => {
     if (!previewRef.current || exporting) return
     setExporting(true)
+    const el = previewRef.current
+
+    // Remove preview scale so html2canvas captures at full A4 size
+    const origTransform = el.style.transform
+    const origTransformOrigin = el.style.transformOrigin
+    el.style.transform = 'none'
+    el.style.transformOrigin = 'top left'
+
     try {
       const html2pdf = (await import('html2pdf.js')).default
       await html2pdf().set({
         margin: 0,
         filename: `${data.personal.name || 'resume'}-resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          logging: false,
+          width: el.scrollWidth,
+          height: el.scrollHeight,
+          windowWidth: el.scrollWidth,
+        },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }).from(previewRef.current).save()
+      }).from(el).save()
     } catch (err) {
       console.error('PDF export failed:', err)
     } finally {
+      el.style.transform = origTransform
+      el.style.transformOrigin = origTransformOrigin
       setExporting(false)
     }
   }, [data.personal.name, exporting])
