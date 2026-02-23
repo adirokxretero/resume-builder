@@ -1,19 +1,27 @@
 import Logo from './Logo'
 
 export default function Footer() {
+  const linkStyle = {
+    color: 'rgba(255,255,255,0.35)',
+    textDecoration: 'none',
+    transition: 'color 0.2s',
+    fontSize: '13px',
+    letterSpacing: '0.01em',
+  }
+
   return (
-    <footer style={{ backgroundColor: '#1a1a1a', color: '#a3a098', padding: '48px 24px' }}>
+    <footer style={{ backgroundColor: '#0a0a0c', borderTop: '1px solid rgba(255,255,255,0.06)', padding: '40px 24px' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '20px' }}>
           <Logo light />
-          <div style={{ display: 'flex', gap: '32px', fontSize: '14px' }}>
-            <a href="#features" style={{ color: '#a3a098', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#faf9f6'} onMouseLeave={e => e.currentTarget.style.color = '#a3a098'}>Features</a>
-            <a href="#templates" style={{ color: '#a3a098', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#faf9f6'} onMouseLeave={e => e.currentTarget.style.color = '#a3a098'}>Templates</a>
-            <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#a3a098', textDecoration: 'none', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#faf9f6'} onMouseLeave={e => e.currentTarget.style.color = '#a3a098'}>GitHub</a>
+          <div style={{ display: 'flex', gap: '28px' }}>
+            <a href="#features" style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = '#e8944a'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}>Features</a>
+            <a href="#templates" style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = '#e8944a'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}>Templates</a>
+            <a href="https://github.com" target="_blank" rel="noreferrer" style={linkStyle} onMouseEnter={e => e.currentTarget.style.color = '#e8944a'} onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.35)'}>GitHub</a>
           </div>
         </div>
-        <div style={{ marginTop: '32px', paddingTop: '24px', borderTop: '1px solid #333', textAlign: 'center', fontSize: '13px', color: '#666' }}>
-          &copy; {new Date().getFullYear()} ResumeForge. Handcrafted with care.
+        <div style={{ marginTop: '28px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.06)', textAlign: 'center', fontSize: '12px', color: 'rgba(255,255,255,0.2)' }}>
+          &copy; {new Date().getFullYear()} ResumeForge
         </div>
       </div>
     </footer>

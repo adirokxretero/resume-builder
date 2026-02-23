@@ -10,13 +10,13 @@ const sectionTabs = [
 
 const inputStyle = {
   width: '100%', padding: '11px 14px',
-  backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px',
-  fontSize: '15px', color: '#2c2c2c', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
+  backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px',
+  fontSize: '15px', color: '#f0ece6', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
 }
 
 const labelStyle = {
-  display: 'block', fontSize: '13px', fontWeight: 600,
-  color: '#6b6560', marginBottom: '7px', letterSpacing: '0.01em',
+  display: 'block', fontSize: '12px', fontWeight: 600,
+  color: 'rgba(255,255,255,0.35)', marginBottom: '7px', letterSpacing: '0.02em', textTransform: 'uppercase',
 }
 
 function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
@@ -26,8 +26,8 @@ function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
       <input
         type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
-        onFocus={e => { e.target.style.borderColor = '#c05621'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.08)' }}
-        onBlur={e => { e.target.style.borderColor = '#e2ddd7'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(232,148,74,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -40,8 +40,8 @@ function Textarea({ label, value, onChange, placeholder = '', rows = 3 }) {
       <textarea
         value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder} rows={rows}
         style={{ ...inputStyle, resize: 'none', lineHeight: 1.6 }}
-        onFocus={e => { e.target.style.borderColor = '#c05621'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.08)' }}
-        onBlur={e => { e.target.style.borderColor = '#e2ddd7'; e.target.style.boxShadow = 'none' }}
+        onFocus={e => { e.target.style.borderColor = 'rgba(232,148,74,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(192,86,33,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = 'rgba(255,255,255,0.08)'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -52,15 +52,15 @@ function AddButton({ onClick, label }) {
     <button
       onClick={onClick}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px',
-        color: '#c05621', fontWeight: 600, background: 'none', border: '1.5px dashed #e0c8b8',
+        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px',
+        color: '#e8944a', fontWeight: 600, background: 'none', border: '1px dashed rgba(232,148,74,0.25)',
         padding: '12px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
         width: '100%', justifyContent: 'center',
       }}
-      onMouseEnter={e => { e.currentTarget.style.background = '#fdf2ec'; e.currentTarget.style.borderColor = '#c05621' }}
-      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = '#e0c8b8' }}
+      onMouseEnter={e => { e.currentTarget.style.background = 'rgba(192,86,33,0.08)'; e.currentTarget.style.borderColor = 'rgba(232,148,74,0.4)' }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = 'rgba(232,148,74,0.25)' }}
     >
-      <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
       </svg>
       {label}
@@ -72,11 +72,11 @@ function DeleteButton({ onClick }) {
   return (
     <button
       onClick={onClick}
-      style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#a3a098', transition: 'all 0.2s', display: 'flex' }}
-      onMouseEnter={e => { e.currentTarget.style.color = '#c05621'; e.currentTarget.style.background = '#fdf2ec' }}
-      onMouseLeave={e => { e.currentTarget.style.color = '#a3a098'; e.currentTarget.style.background = 'transparent' }}
+      style={{ position: 'absolute', top: '10px', right: '10px', padding: '5px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: 'rgba(255,255,255,0.2)', transition: 'all 0.2s', display: 'flex' }}
+      onMouseEnter={e => { e.currentTarget.style.color = '#e8944a'; e.currentTarget.style.background = 'rgba(192,86,33,0.1)' }}
+      onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
     >
-      <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -84,7 +84,7 @@ function DeleteButton({ onClick }) {
 }
 
 const cardStyle = {
-  backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '14px',
+  backgroundColor: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '14px',
   padding: '20px', position: 'relative', display: 'flex', flexDirection: 'column', gap: '14px',
 }
 
@@ -99,13 +99,13 @@ function PersonalSection({ data, updatePersonal }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '18px', background: '#fff', borderRadius: '14px', border: '1.5px solid #e2ddd7' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '18px', background: 'rgba(255,255,255,0.03)', borderRadius: '14px', border: '1px solid rgba(255,255,255,0.06)' }}>
         <div style={{ position: 'relative' }}>
-          <div style={{ width: '68px', height: '68px', borderRadius: '50%', backgroundColor: '#f5f0eb', border: '2px dashed #d4cfc9', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
+          <div style={{ width: '64px', height: '64px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px dashed rgba(255,255,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
             {data.photo ? (
               <img src={data.photo} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
-              <svg style={{ width: '26px', height: '26px', color: '#a3a098' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg style={{ width: '22px', height: '22px', color: 'rgba(255,255,255,0.2)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
               </svg>
@@ -116,10 +116,10 @@ function PersonalSection({ data, updatePersonal }) {
           </label>
         </div>
         <div>
-          <p style={{ fontSize: '15px', fontWeight: 600, color: '#2c2c2c' }}>Profile Photo</p>
-          <p style={{ fontSize: '13px', color: '#a3a098', marginTop: '2px' }}>Click circle to upload</p>
+          <p style={{ fontSize: '14px', fontWeight: 600, color: '#f0ece6' }}>Profile Photo</p>
+          <p style={{ fontSize: '12px', color: 'rgba(255,255,255,0.3)', marginTop: '2px' }}>Click to upload</p>
           {data.photo && (
-            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '12px', color: '#c05621', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 500 }}>
+            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '11px', color: '#e8944a', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 600 }}>
               Remove
             </button>
           )}
@@ -148,18 +148,18 @@ function SkillsSection({ skills, onChange }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <p style={{ fontSize: '14px', color: '#6b6560', lineHeight: 1.5 }}>Add your skills — they show up as tags on the resume.</p>
+      <p style={{ fontSize: '13px', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>Add your skills — they appear as tags on the resume.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
               value={skill} onChange={e => updateSkill(i, e.target.value)} placeholder="Type skill..."
-              style={{ fontSize: '14px', border: 'none', outline: 'none', background: 'transparent', width: '120px', color: '#2c2c2c', fontFamily: 'inherit' }}
+              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#f0ece6', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
-              <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: '#a3a098', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
-                onMouseEnter={e => { e.currentTarget.style.color = '#c05621' }} onMouseLeave={e => { e.currentTarget.style.color = '#a3a098' }}>
-                <svg style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#e8944a' }} onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)' }}>
+                <svg style={{ width: '12px', height: '12px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
             )}
           </div>
@@ -212,8 +212,8 @@ function ExperienceSection({ experience, onChange }) {
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', cursor: 'pointer' }}>
                 <input type="checkbox" checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
-                  style={{ width: '15px', height: '15px', accentColor: '#c05621' }} />
-                <span style={{ fontSize: '13px', color: '#6b6560' }}>Currently here</span>
+                  style={{ width: '14px', height: '14px', accentColor: '#e8944a' }} />
+                <span style={{ fontSize: '12px', color: 'rgba(255,255,255,0.35)' }}>Currently here</span>
               </label>
             </div>
           </div>
@@ -255,7 +255,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', padding: '14px 18px 0', overflowX: 'auto', borderBottom: '1px solid #e2ddd7', backgroundColor: '#faf9f6' }}>
+      <div style={{ display: 'flex', gap: '2px', padding: '12px 16px 0', overflowX: 'auto', borderBottom: '1px solid rgba(255,255,255,0.06)', background: '#17171a' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
@@ -264,15 +264,15 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               onClick={() => setActiveTab(tab.id)}
               style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '10px 16px', fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap',
+                padding: '10px 14px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
-                borderBottom: isActive ? '2px solid #c05621' : '2px solid transparent',
-                background: isActive ? '#fff' : 'transparent',
-                color: isActive ? '#c05621' : '#a3a098',
+                borderBottom: isActive ? '2px solid #e8944a' : '2px solid transparent',
+                background: isActive ? 'rgba(255,255,255,0.04)' : 'transparent',
+                color: isActive ? '#e8944a' : 'rgba(255,255,255,0.3)',
               }}
             >
-              <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg style={{ width: '13px', height: '13px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
               </svg>
               {tab.label}
