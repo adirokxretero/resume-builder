@@ -31,6 +31,18 @@ export default function Builder() {
     return () => window.removeEventListener('resize', calculateScale)
   }, [calculateScale])
 
+  // Inject Monetag ad script on-demand, wait briefly, then run callback
+  const showAdThenDownload = useCallback((downloadFn) => {
+    const existingTag = document.querySelector('script[data-zone="10645922"]')
+    if (!existingTag) {
+      const s = document.createElement('script')
+      s.dataset.zone = '10645922'
+      s.src = 'https://al5sm.com/tag.min.js'
+      document.body.appendChild(s)
+    }
+    setTimeout(() => downloadFn(), 1500)
+  }, [])
+
   const handleExportPDF = useCallback(async () => {
     if (!previewRef.current || exporting) return
     setExporting(true)
@@ -127,7 +139,7 @@ export default function Builder() {
           </button>
 
           <button
-            onClick={handleExportPDF}
+            onClick={() => showAdThenDownload(handleExportPDF)}
             disabled={exporting}
             style={{
               display: 'flex', alignItems: 'center', gap: '8px',
