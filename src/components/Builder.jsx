@@ -5,6 +5,7 @@ import ResumeForm from './ResumeForm'
 import ResumePreview from './ResumePreview'
 import TemplateSelector from './TemplateSelector'
 import SamplePicker from './SamplePicker'
+import AIGenerator from './AIGenerator'
 import { useResumeData } from '../hooks/useResumeData'
 
 export default function Builder() {
@@ -73,6 +74,7 @@ export default function Builder() {
           <TemplateSelector selected={template} onSelect={setTemplate} />
           <div style={{ width: '1px', height: '26px', backgroundColor: '#e2ddd7' }} />
           <SamplePicker onLoad={handleLoadSample} />
+          <AIGenerator onGenerate={(resume) => setData(resume)} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           <button
