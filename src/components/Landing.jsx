@@ -105,17 +105,6 @@ export default function Landing() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative' }}>
-      {/* AI-built banner */}
-      <div style={{
-        padding: '5px 0', textAlign: 'center',
-        background: 'rgba(0,212,255,0.04)', borderBottom: '1px solid rgba(42,42,58,0.4)',
-        position: 'relative', zIndex: 51,
-      }}>
-        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.02em' }}>
-          Built with AI-assisted development
-        </span>
-      </div>
-
       {/* ── Cursor Glow ── */}
       <div style={{
         position: 'fixed', width: '500px', height: '500px', borderRadius: '50%',
