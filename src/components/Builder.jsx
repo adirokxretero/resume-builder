@@ -32,15 +32,22 @@ export default function Builder() {
   }, [calculateScale])
 
   const showAdThenDownload = useCallback((downloadFn) => {
-    const existingTag = document.querySelector('script[data-zone="10645922"]')
-    if (existingTag) {
+    const AD_COOLDOWN_MS = 10 * 60 * 1000
+    const lastShown = parseInt(localStorage.getItem('monetag_last_ad') || '0', 10)
+
+    if (Date.now() - lastShown < AD_COOLDOWN_MS) {
       downloadFn()
       return
     }
+
+    // Remove stale script so a fresh one can be injected
+    const old = document.querySelector('script[data-zone="10645922"]')
+    if (old) old.remove()
+
     const s = document.createElement('script')
     s.dataset.zone = '10645922'
     s.src = 'https://al5sm.com/tag.min.js'
-    s.onload = () => downloadFn()
+    s.onload = () => { localStorage.setItem('monetag_last_ad', String(Date.now())); downloadFn() }
     s.onerror = () => downloadFn()
     document.body.appendChild(s)
   }, [])
