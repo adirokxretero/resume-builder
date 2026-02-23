@@ -8,19 +8,22 @@ const templateMap = {
   minimal: MinimalTemplate,
 }
 
-export default function ResumePreview({ data, template, previewRef }) {
+export default function ResumePreview({ data, template, previewRef, scale = 0.5 }) {
   const Template = templateMap[template] || ModernTemplate
 
   return (
-    <div className="flex items-start justify-center p-4 bg-surface-200/50 min-h-full">
+    <div style={{ display: 'flex', justifyContent: 'center', minHeight: '100%' }}>
       <div
         ref={previewRef}
-        className="bg-white shadow-xl origin-top"
         style={{
           width: '210mm',
           minHeight: '297mm',
-          transform: 'scale(var(--preview-scale, 0.5))',
+          background: '#ffffff',
+          boxShadow: '0 25px 60px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.05)',
+          borderRadius: '4px',
+          transform: `scale(${scale})`,
           transformOrigin: 'top center',
+          flexShrink: 0,
         }}
       >
         <Template data={data} />

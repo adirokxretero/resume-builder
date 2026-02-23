@@ -8,16 +8,40 @@ const sectionTabs = [
   { id: 'projects', label: 'Projects', icon: 'M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z' },
 ]
 
+const inputStyle = {
+  width: '100%',
+  padding: '10px 14px',
+  backgroundColor: '#f8fafc',
+  border: '1.5px solid #e2e8f0',
+  borderRadius: '10px',
+  fontSize: '14px',
+  color: '#1e293b',
+  outline: 'none',
+  transition: 'all 0.2s',
+  fontFamily: 'inherit',
+}
+
+const labelStyle = {
+  display: 'block',
+  fontSize: '12px',
+  fontWeight: 600,
+  color: '#475569',
+  marginBottom: '6px',
+  letterSpacing: '0.02em',
+}
+
 function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-surface-600 mb-1.5">{label}</label>
+      <label style={labelStyle}>{label}</label>
       <input
         type={type}
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full px-3 py-2.5 bg-white border border-surface-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow placeholder:text-surface-400"
+        style={inputStyle}
+        onFocus={e => { e.target.style.borderColor = '#93c5fd'; e.target.style.backgroundColor = '#fff'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.backgroundColor = '#f8fafc'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
@@ -26,16 +50,60 @@ function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
 function Textarea({ label, value, onChange, placeholder = '', rows = 3 }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-surface-600 mb-1.5">{label}</label>
+      <label style={labelStyle}>{label}</label>
       <textarea
         value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         rows={rows}
-        className="w-full px-3 py-2.5 bg-white border border-surface-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow resize-none placeholder:text-surface-400"
+        style={{ ...inputStyle, resize: 'none', lineHeight: 1.6 }}
+        onFocus={e => { e.target.style.borderColor = '#93c5fd'; e.target.style.backgroundColor = '#fff'; e.target.style.boxShadow = '0 0 0 3px rgba(59,130,246,0.1)' }}
+        onBlur={e => { e.target.style.borderColor = '#e2e8f0'; e.target.style.backgroundColor = '#f8fafc'; e.target.style.boxShadow = 'none' }}
       />
     </div>
   )
+}
+
+function AddButton({ onClick, label }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: '#2563eb', fontWeight: 600, background: 'none', border: '1.5px dashed #bfdbfe', padding: '10px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s', width: '100%', justifyContent: 'center' }}
+      onMouseEnter={e => { e.currentTarget.style.background = '#eff6ff'; e.currentTarget.style.borderColor = '#93c5fd' }}
+      onMouseLeave={e => { e.currentTarget.style.background = 'none'; e.currentTarget.style.borderColor = '#bfdbfe' }}
+    >
+      <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      {label}
+    </button>
+  )
+}
+
+function DeleteButton({ onClick }) {
+  return (
+    <button
+      onClick={onClick}
+      style={{ position: 'absolute', top: '12px', right: '12px', padding: '6px', borderRadius: '6px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', transition: 'all 0.2s', display: 'flex' }}
+      onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
+      onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'transparent' }}
+    >
+      <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  )
+}
+
+const cardStyle = {
+  backgroundColor: '#f8fafc',
+  border: '1.5px solid #e2e8f0',
+  borderRadius: '14px',
+  padding: '20px',
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '14px',
 }
 
 function PersonalSection({ data, updatePersonal }) {
@@ -48,41 +116,44 @@ function PersonalSection({ data, updatePersonal }) {
   }
 
   return (
-    <div className="space-y-4 animate-fade-in">
-      <div className="flex items-center gap-4 mb-6">
-        <div className="relative group">
-          <div className="w-20 h-20 rounded-full bg-surface-100 border-2 border-dashed border-surface-300 flex items-center justify-center overflow-hidden">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+      {/* Photo Upload */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px', background: '#f8fafc', borderRadius: '14px', border: '1.5px solid #e2e8f0' }}>
+        <div style={{ position: 'relative' }}>
+          <div style={{ width: '72px', height: '72px', borderRadius: '50%', backgroundColor: '#e2e8f0', border: '2px dashed #cbd5e1', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', cursor: 'pointer' }}>
             {data.photo ? (
-              <img src={data.photo} alt="Profile" className="w-full h-full object-cover" />
+              <img src={data.photo} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             ) : (
-              <svg className="w-8 h-8 text-surface-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg style={{ width: '28px', height: '28px', color: '#94a3b8' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
               </svg>
             )}
           </div>
-          <label className="absolute inset-0 cursor-pointer rounded-full">
-            <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+          <label style={{ position: 'absolute', inset: 0, cursor: 'pointer', borderRadius: '50%' }}>
+            <input type="file" accept="image/*" onChange={handlePhotoUpload} style={{ display: 'none' }} />
           </label>
         </div>
         <div>
-          <p className="text-sm font-medium text-surface-700">Profile Photo</p>
-          <p className="text-xs text-surface-400 mt-0.5">Click to upload (optional)</p>
+          <p style={{ fontSize: '14px', fontWeight: 600, color: '#334155' }}>Profile Photo</p>
+          <p style={{ fontSize: '12px', color: '#94a3b8', marginTop: '2px' }}>Click to upload (optional)</p>
           {data.photo && (
-            <button onClick={() => updatePersonal('photo', null)} className="text-xs text-red-500 hover:text-red-600 mt-1">
-              Remove
+            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '12px', color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 500 }}>
+              Remove photo
             </button>
           )}
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+      {/* Fields */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
         <Input label="Full Name" value={data.name} onChange={v => updatePersonal('name', v)} placeholder="John Doe" />
         <Input label="Job Title" value={data.title} onChange={v => updatePersonal('title', v)} placeholder="Software Engineer" />
         <Input label="Email" value={data.email} onChange={v => updatePersonal('email', v)} type="email" placeholder="john@example.com" />
         <Input label="Phone" value={data.phone} onChange={v => updatePersonal('phone', v)} placeholder="+1 (555) 123-4567" />
         <Input label="Location" value={data.location} onChange={v => updatePersonal('location', v)} placeholder="San Francisco, CA" />
         <Input label="Website" value={data.website} onChange={v => updatePersonal('website', v)} placeholder="johndoe.com" />
-        <div className="sm:col-span-2">
+        <div style={{ gridColumn: 'span 2' }}>
           <Input label="LinkedIn" value={data.linkedin} onChange={v => updatePersonal('linkedin', v)} placeholder="linkedin.com/in/johndoe" />
         </div>
       </div>
@@ -97,20 +168,25 @@ function SkillsSection({ skills, onChange }) {
   const updateSkill = (idx, val) => onChange(skills.map((s, i) => i === idx ? val : s))
 
   return (
-    <div className="space-y-3 animate-fade-in">
-      <p className="text-sm text-surface-500 mb-4">Add your technical and soft skills. These will be displayed as tags on your resume.</p>
-      <div className="flex flex-wrap gap-2">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <p style={{ fontSize: '13px', color: '#64748b', lineHeight: 1.5 }}>Add your technical and soft skills. These appear as tags on your resume.</p>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
-          <div key={i} className="flex items-center gap-1 bg-white border border-surface-200 rounded-lg pl-3 pr-1 py-1">
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#f8fafc', border: '1.5px solid #e2e8f0', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
               value={skill}
               onChange={e => updateSkill(i, e.target.value)}
               placeholder="Enter skill..."
-              className="text-sm border-none outline-none bg-transparent w-28 placeholder:text-surface-400"
+              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '120px', color: '#1e293b', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
-              <button onClick={() => removeSkill(i)} className="p-1 text-surface-400 hover:text-red-500 transition-colors">
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <button
+                onClick={() => removeSkill(i)}
+                style={{ padding: '4px', color: '#94a3b8', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.2s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'none' }}
+              >
+                <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
@@ -118,12 +194,7 @@ function SkillsSection({ skills, onChange }) {
           </div>
         ))}
       </div>
-      <button onClick={addSkill} className="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium mt-2">
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        Add Skill
-      </button>
+      <AddButton onClick={addSkill} label="Add Skill" />
     </div>
   )
 }
@@ -134,17 +205,11 @@ function EducationSection({ education, onChange }) {
   const updateEntry = (idx, field, val) => onChange(education.map((e, i) => i === idx ? { ...e, [field]: val } : e))
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {education.map((edu, i) => (
-        <div key={i} className="bg-white border border-surface-200 rounded-xl p-4 space-y-4 relative">
-          {education.length > 1 && (
-            <button onClick={() => removeEntry(i)} className="absolute top-3 right-3 p-1.5 text-surface-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-              </svg>
-            </button>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div key={i} style={cardStyle}>
+          {education.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             <Input label="Institution" value={edu.institution} onChange={v => updateEntry(i, 'institution', v)} placeholder="MIT" />
             <Input label="Degree" value={edu.degree} onChange={v => updateEntry(i, 'degree', v)} placeholder="Bachelor of Science" />
             <Input label="Field of Study" value={edu.field} onChange={v => updateEntry(i, 'field', v)} placeholder="Computer Science" />
@@ -154,12 +219,7 @@ function EducationSection({ education, onChange }) {
           </div>
         </div>
       ))}
-      <button onClick={addEntry} className="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium">
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        Add Education
-      </button>
+      <AddButton onClick={addEntry} label="Add Education" />
     </div>
   )
 }
@@ -170,42 +230,31 @@ function ExperienceSection({ experience, onChange }) {
   const updateEntry = (idx, field, val) => onChange(experience.map((e, i) => i === idx ? { ...e, [field]: val } : e))
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {experience.map((exp, i) => (
-        <div key={i} className="bg-white border border-surface-200 rounded-xl p-4 space-y-4 relative">
-          {experience.length > 1 && (
-            <button onClick={() => removeEntry(i)} className="absolute top-3 right-3 p-1.5 text-surface-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-              </svg>
-            </button>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div key={i} style={cardStyle}>
+          {experience.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             <Input label="Company" value={exp.company} onChange={v => updateEntry(i, 'company', v)} placeholder="Google" />
             <Input label="Position" value={exp.position} onChange={v => updateEntry(i, 'position', v)} placeholder="Senior Engineer" />
             <Input label="Start Date" value={exp.startDate} onChange={v => updateEntry(i, 'startDate', v)} placeholder="Jan 2022" />
             <div>
               <Input label="End Date" value={exp.current ? '' : exp.endDate} onChange={v => updateEntry(i, 'endDate', v)} placeholder="Present" />
-              <label className="flex items-center gap-2 mt-2 cursor-pointer">
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', cursor: 'pointer' }}>
                 <input
                   type="checkbox"
                   checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
-                  className="w-4 h-4 text-primary-600 rounded border-surface-300 focus:ring-primary-500"
+                  style={{ width: '16px', height: '16px', accentColor: '#2563eb' }}
                 />
-                <span className="text-xs text-surface-500">Currently working here</span>
+                <span style={{ fontSize: '12px', color: '#64748b' }}>Currently working here</span>
               </label>
             </div>
           </div>
-          <Textarea label="Description" value={exp.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="Describe your responsibilities and achievements. Use bullet points (start lines with •)..." />
+          <Textarea label="Description" value={exp.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="Describe your responsibilities and achievements..." />
         </div>
       ))}
-      <button onClick={addEntry} className="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium">
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        Add Experience
-      </button>
+      <AddButton onClick={addEntry} label="Add Experience" />
     </div>
   )
 }
@@ -216,32 +265,21 @@ function ProjectsSection({ projects, onChange }) {
   const updateEntry = (idx, field, val) => onChange(projects.map((e, i) => i === idx ? { ...e, [field]: val } : e))
 
   return (
-    <div className="space-y-6 animate-fade-in">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
       {projects.map((proj, i) => (
-        <div key={i} className="bg-white border border-surface-200 rounded-xl p-4 space-y-4 relative">
-          {projects.length > 1 && (
-            <button onClick={() => removeEntry(i)} className="absolute top-3 right-3 p-1.5 text-surface-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-              </svg>
-            </button>
-          )}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div key={i} style={cardStyle}>
+          {projects.length > 1 && <DeleteButton onClick={() => removeEntry(i)} />}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             <Input label="Project Name" value={proj.name} onChange={v => updateEntry(i, 'name', v)} placeholder="E-Commerce Platform" />
             <Input label="Technologies" value={proj.technologies} onChange={v => updateEntry(i, 'technologies', v)} placeholder="React, Node.js, PostgreSQL" />
-            <div className="sm:col-span-2">
+            <div style={{ gridColumn: 'span 2' }}>
               <Input label="Link (optional)" value={proj.link} onChange={v => updateEntry(i, 'link', v)} placeholder="https://github.com/..." />
             </div>
           </div>
           <Textarea label="Description" value={proj.description} onChange={v => updateEntry(i, 'description', v)} rows={3} placeholder="Describe the project, your role, and the impact..." />
         </div>
       ))}
-      <button onClick={addEntry} className="inline-flex items-center gap-1.5 text-sm text-primary-600 hover:text-primary-700 font-medium">
-        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-        Add Project
-      </button>
+      <AddButton onClick={addEntry} label="Add Project" />
     </div>
   )
 }
@@ -250,29 +288,44 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
   const [activeTab, setActiveTab] = useState('personal')
 
   return (
-    <div className="h-full flex flex-col">
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Tabs */}
-      <div className="flex gap-1 px-1 pb-4 overflow-x-auto scrollbar-thin">
-        {sectionTabs.map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
-              activeTab === tab.id
-                ? 'bg-primary-600 text-white shadow-sm'
-                : 'text-surface-500 hover:text-surface-700 hover:bg-surface-100'
-            }`}
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
-            </svg>
-            {tab.label}
-          </button>
-        ))}
+      <div style={{ display: 'flex', gap: '4px', padding: '16px 20px 0', overflowX: 'auto', borderBottom: '1px solid #e2e8f0', backgroundColor: '#fff' }}>
+        {sectionTabs.map(tab => {
+          const isActive = activeTab === tab.id
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '10px 16px',
+                fontSize: '13px',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                borderRadius: '8px 8px 0 0',
+                border: 'none',
+                borderBottom: isActive ? '2px solid #2563eb' : '2px solid transparent',
+                background: isActive ? '#eff6ff' : 'transparent',
+                color: isActive ? '#1d4ed8' : '#94a3b8',
+                marginBottom: '-1px',
+              }}
+            >
+              <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d={tab.icon} />
+              </svg>
+              {tab.label}
+            </button>
+          )
+        })}
       </div>
 
       {/* Form Content */}
-      <div className="flex-1 overflow-y-auto scrollbar-thin pr-1">
+      <div style={{ flex: 1, overflowY: 'auto', padding: '20px' }}>
         {activeTab === 'personal' && <PersonalSection data={data.personal} updatePersonal={updatePersonal} />}
         {activeTab === 'skills' && <SkillsSection skills={data.skills} onChange={v => updateSection('skills', v)} />}
         {activeTab === 'education' && <EducationSection education={data.education} onChange={v => updateSection('education', v)} />}

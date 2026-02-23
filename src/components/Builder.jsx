@@ -16,8 +16,8 @@ export default function Builder() {
 
   const calculateScale = useCallback(() => {
     if (!previewContainerRef.current) return
-    const containerWidth = previewContainerRef.current.offsetWidth - 32
-    const a4Width = 794 // 210mm in px at 96dpi
+    const containerWidth = previewContainerRef.current.offsetWidth - 64
+    const a4Width = 794
     const scale = Math.min(containerWidth / a4Width, 0.75)
     setPreviewScale(scale)
   }, [])
@@ -34,14 +34,13 @@ export default function Builder() {
     try {
       const html2pdf = (await import('html2pdf.js')).default
       const element = previewRef.current
-      const opt = {
+      await html2pdf().set({
         margin: 0,
         filename: `${data.personal.name || 'resume'}-resume.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2, useCORS: true, logging: false },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }
-      await html2pdf().set(opt).from(element).save()
+      }).from(element).save()
     } catch (err) {
       console.error('PDF export failed:', err)
     } finally {
@@ -56,21 +55,23 @@ export default function Builder() {
   }
 
   return (
-    <div className="h-screen flex flex-col bg-surface-50">
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#f1f5f9' }}>
       {/* Top Bar */}
-      <header className="bg-white border-b border-surface-200 px-4 py-2.5 flex items-center justify-between gap-4 shrink-0 z-10">
-        <div className="flex items-center gap-4">
+      <header style={{ background: '#ffffff', borderBottom: '1px solid #e2e8f0', padding: '0 20px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px', flexShrink: 0, zIndex: 10, boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
           <Logo />
-          <div className="hidden md:block h-6 w-px bg-surface-200" />
+          <div style={{ width: '1px', height: '28px', backgroundColor: '#e2e8f0' }} />
           <TemplateSelector selected={template} onSelect={setTemplate} />
         </div>
-        <div className="flex items-center gap-2">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
             onClick={handleReset}
-            className="px-3 py-2 text-sm text-surface-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
             title="Clear all data"
+            style={{ padding: '8px', borderRadius: '8px', border: 'none', background: 'transparent', cursor: 'pointer', color: '#94a3b8', display: 'flex', alignItems: 'center', transition: 'all 0.2s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = '#ef4444'; e.currentTarget.style.background = '#fef2f2' }}
+            onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.background = 'transparent' }}
           >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <svg style={{ width: '18px', height: '18px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
             </svg>
           </button>
@@ -78,7 +79,8 @@ export default function Builder() {
           {/* Mobile preview toggle */}
           <button
             onClick={() => setShowPreview(!showPreview)}
-            className="md:hidden px-3 py-2 text-sm font-medium rounded-lg border border-surface-200 text-surface-600 hover:bg-surface-50 transition-colors"
+            className="mobile-toggle"
+            style={{ padding: '8px 14px', borderRadius: '8px', border: '1px solid #e2e8f0', background: '#fff', cursor: 'pointer', fontSize: '13px', fontWeight: 600, color: '#475569', display: 'none' }}
           >
             {showPreview ? 'Edit' : 'Preview'}
           </button>
@@ -86,39 +88,62 @@ export default function Builder() {
           <button
             onClick={handleExportPDF}
             disabled={exporting}
-            className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary-700 transition-colors shadow-sm disabled:opacity-60"
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', backgroundColor: '#2563eb', color: '#fff', padding: '9px 18px', borderRadius: '8px', fontSize: '13px', fontWeight: 600, border: 'none', cursor: exporting ? 'wait' : 'pointer', boxShadow: '0 1px 3px rgba(37,99,235,0.3)', opacity: exporting ? 0.7 : 1, transition: 'all 0.2s' }}
+            onMouseEnter={e => { if (!exporting) e.currentTarget.style.backgroundColor = '#1d4ed8' }}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#2563eb'}
           >
             {exporting ? (
-              <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+              <svg style={{ width: '16px', height: '16px', animation: 'spin 1s linear infinite' }} fill="none" viewBox="0 0 24 24">
+                <circle style={{ opacity: 0.25 }} cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path style={{ opacity: 0.75 }} fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
               </svg>
             ) : (
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg style={{ width: '16px', height: '16px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
               </svg>
             )}
-            <span className="hidden sm:inline">{exporting ? 'Exporting...' : 'Download PDF'}</span>
+            {exporting ? 'Exporting...' : 'Download PDF'}
           </button>
         </div>
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex overflow-hidden">
+      <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         {/* Form Panel */}
-        <div className={`w-full md:w-[420px] lg:w-[480px] shrink-0 bg-surface-50 border-r border-surface-200 p-5 overflow-y-auto scrollbar-thin ${showPreview ? 'hidden md:block' : ''}`}>
+        <div
+          style={{
+            width: '460px',
+            flexShrink: 0,
+            background: '#ffffff',
+            borderRight: '1px solid #e2e8f0',
+            overflowY: 'auto',
+            display: showPreview ? 'none' : 'block',
+          }}
+        >
           <ResumeForm data={data} updatePersonal={updatePersonal} updateSection={updateSection} />
         </div>
 
         {/* Preview Panel */}
         <div
           ref={previewContainerRef}
-          className={`flex-1 overflow-auto scrollbar-thin ${!showPreview ? 'hidden md:block' : ''}`}
-          style={{ '--preview-scale': previewScale }}
+          style={{
+            flex: 1,
+            overflow: 'auto',
+            background: 'linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%)',
+            display: !showPreview ? undefined : 'block',
+            padding: '32px',
+          }}
         >
-          <ResumePreview data={data} template={template} previewRef={previewRef} />
+          <ResumePreview data={data} template={template} previewRef={previewRef} scale={previewScale} />
         </div>
       </div>
+
+      <style>{`
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @media (max-width: 768px) {
+          .mobile-toggle { display: flex !important; }
+        }
+      `}</style>
     </div>
   )
 }
