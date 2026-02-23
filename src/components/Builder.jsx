@@ -4,10 +4,11 @@ import Logo from './Logo'
 import ResumeForm from './ResumeForm'
 import ResumePreview from './ResumePreview'
 import TemplateSelector from './TemplateSelector'
+import SamplePicker from './SamplePicker'
 import { useResumeData } from '../hooks/useResumeData'
 
 export default function Builder() {
-  const { data, template, setTemplate, updatePersonal, updateSection, resetData } = useResumeData()
+  const { data, setData, template, setTemplate, updatePersonal, updateSection, resetData } = useResumeData()
   const previewRef = useRef(null)
   const previewContainerRef = useRef(null)
   const [exporting, setExporting] = useState(false)
@@ -54,6 +55,13 @@ export default function Builder() {
     }
   }
 
+  const handleLoadSample = (sample) => {
+    if (window.confirm(`Load "${sample.data.personal.name}" example? This will replace your current data.`)) {
+      setData(sample.data)
+      setTemplate(sample.template)
+    }
+  }
+
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#f1f5f9' }}>
       {/* Top Bar */}
@@ -62,6 +70,8 @@ export default function Builder() {
           <Logo />
           <div style={{ width: '1px', height: '28px', backgroundColor: '#e2e8f0' }} />
           <TemplateSelector selected={template} onSelect={setTemplate} />
+          <div style={{ width: '1px', height: '28px', backgroundColor: '#e2e8f0' }} />
+          <SamplePicker onLoad={handleLoadSample} />
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <button
