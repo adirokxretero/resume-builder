@@ -76,7 +76,7 @@ export default function Landing() {
       </nav>
 
       {/* Hero */}
-      <section className="pt-32 pb-20 px-6 bg-gradient-to-br from-primary-50 via-white to-accent-500/5">
+      <section className="pt-40 pb-28 px-6 bg-gradient-to-b from-blue-50 via-white to-white border-b border-surface-200">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
           <div className="inline-flex items-center gap-2 bg-primary-100 text-primary-700 px-4 py-1.5 rounded-full text-sm font-medium mb-6">
             <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
