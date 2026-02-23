@@ -101,6 +101,15 @@ export default function Builder() {
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F' }}>
+      {/* AI-built banner */}
+      <div style={{
+        padding: '5px 0', textAlign: 'center', flexShrink: 0,
+        background: 'rgba(0,212,255,0.04)', borderBottom: '1px solid rgba(42,42,58,0.4)',
+      }}>
+        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.02em' }}>
+          Built with AI-assisted development
+        </span>
+      </div>
       {/* Mobile banner */}
       <div className="mobile-banner" style={{
         display: 'none',
