@@ -1,17 +1,40 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { sampleResumes } from '../data/sampleResumes'
 
 export default function SamplePicker({ onLoad }) {
   const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const btnRef = useRef(null)
+  const dropRef = useRef(null)
+  const [pos, setPos] = useState({ top: 0, left: 0 })
+
+  const updatePos = useCallback(() => {
+    if (!btnRef.current) return
+    const r = btnRef.current.getBoundingClientRect()
+    setPos({ top: r.bottom + 8, left: r.left })
+  }, [])
 
   useEffect(() => {
     const handler = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+      if (
+        btnRef.current && !btnRef.current.contains(e.target) &&
+        dropRef.current && !dropRef.current.contains(e.target)
+      ) setOpen(false)
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
   }, [])
+
+  useEffect(() => {
+    if (open) {
+      updatePos()
+      window.addEventListener('resize', updatePos)
+      window.addEventListener('scroll', updatePos, true)
+      return () => {
+        window.removeEventListener('resize', updatePos)
+        window.removeEventListener('scroll', updatePos, true)
+      }
+    }
+  }, [open, updatePos])
 
   const handleSelect = (sample) => {
     onLoad(sample)
@@ -19,8 +42,9 @@ export default function SamplePicker({ onLoad }) {
   }
 
   return (
-    <div ref={ref} style={{ position: 'relative' }}>
+    <>
       <button
+        ref={btnRef}
         onClick={() => setOpen(!open)}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
@@ -43,12 +67,15 @@ export default function SamplePicker({ onLoad }) {
       </button>
 
       {open && (
-        <div style={{
-          position: 'absolute', top: 'calc(100% + 8px)', left: 0,
-          background: '#1C1C28', borderRadius: '14px', border: '1px solid #2A2A3A',
-          boxShadow: '0 20px 60px rgba(0,0,0,0.5)', width: '300px', zIndex: 100,
-          overflow: 'hidden', animation: 'dropIn 0.15s ease-out',
-        }}>
+        <div
+          ref={dropRef}
+          style={{
+            position: 'fixed', top: pos.top, left: pos.left,
+            background: '#1C1C28', borderRadius: '14px', border: '1px solid #2A2A3A',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.5)', width: '300px', zIndex: 9000,
+            overflow: 'hidden', animation: 'dropIn 0.15s ease-out',
+          }}
+        >
           <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid #2A2A3A' }}>
             <p style={{ fontSize: '14px', fontWeight: 700, color: '#F0F0F5' }}>Load an example</p>
             <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '3px' }}>See how templates look with real data</p>
@@ -84,6 +111,6 @@ export default function SamplePicker({ onLoad }) {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }

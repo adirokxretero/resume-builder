@@ -91,18 +91,17 @@ export default function Builder() {
         </button>
       </div>
 
-      {/* Header */}
+      {/* Row 1: Main toolbar */}
       <header style={{
-        background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px) saturate(180%)',
-        borderBottom: '1px solid #2A2A3A', padding: '0 16px', height: '56px',
+        position: 'relative',
+        background: 'rgba(10,10,15,0.95)',
+        borderBottom: '1px solid rgba(42,42,58,0.5)', padding: '0 16px', height: '52px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px',
-        flexShrink: 0, zIndex: 10,
+        flexShrink: 0, zIndex: 50, overflow: 'visible',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', overflow: 'auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Logo />
-          <div style={{ width: '1px', height: '24px', backgroundColor: '#2A2A3A' }} />
-          <TemplateSelector selected={template} onSelect={setTemplate} />
-          <div style={{ width: '1px', height: '24px', backgroundColor: '#2A2A3A' }} />
+          <div style={{ width: '1px', height: '22px', backgroundColor: '#2A2A3A' }} />
           <SamplePicker onLoad={handleLoadSample} />
           <AIGenerator onGenerate={(resume) => setData(resume)} />
         </div>
@@ -156,6 +155,15 @@ export default function Builder() {
           </button>
         </div>
       </header>
+
+      {/* Row 2: Template selector bar */}
+      <div style={{
+        padding: '6px 16px', background: '#0A0A0F',
+        borderBottom: '1px solid #2A2A3A', flexShrink: 0,
+        overflowX: 'auto',
+      }}>
+        <TemplateSelector selected={template} onSelect={setTemplate} />
+      </div>
 
       {/* Body */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
