@@ -147,6 +147,7 @@ export default function Builder() {
             {showPreview ? 'Edit' : 'Preview'}
           </button>
 
+          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.25)', textAlign: 'center', lineHeight: 1.3 }}>Ads keep this free</span>
           <button
             onClick={() => showAdThenDownload(handleExportPDF)}
             disabled={exporting}
