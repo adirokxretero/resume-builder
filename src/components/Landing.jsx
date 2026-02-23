@@ -129,7 +129,7 @@ export default function Landing() {
                 <a
                   key={link}
                   href={`#${link.toLowerCase().replace(/\s+/g, '-')}`}
-                  style={{ color: '#8A8A9A', textDecoration: 'none', fontSize: '13px', fontWeight: 500, transition: 'color 0.2s', letterSpacing: '0.01em' }}
+                  style={{ color: '#8A8A9A', textDecoration: 'none', fontSize: '14px', fontWeight: 500, transition: 'color 0.2s', letterSpacing: '0.01em' }}
                   onMouseEnter={e => e.currentTarget.style.color = '#F0F0F5'}
                   onMouseLeave={e => e.currentTarget.style.color = '#8A8A9A'}
                 >
@@ -144,7 +144,7 @@ export default function Landing() {
             style={{
               background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '8px 22px', borderRadius: '50px',
-              fontSize: '13px', fontWeight: 600, textDecoration: 'none',
+              fontSize: '14px', fontWeight: 600, textDecoration: 'none',
               transition: 'all 0.3s', animation: 'glowPulse 3s ease-in-out infinite',
               border: 'none',
             }}
@@ -165,7 +165,7 @@ export default function Landing() {
             {/* Badge */}
             <div className="reveal" style={{
               display: 'inline-flex', alignItems: 'center', gap: '7px',
-              fontSize: '11px', fontWeight: 700, color: '#00D4FF',
+              fontSize: '13px', fontWeight: 700, color: '#00D4FF',
               background: 'rgba(0,212,255,0.08)', padding: '6px 16px', borderRadius: '50px',
               marginBottom: '28px', letterSpacing: '0.08em', textTransform: 'uppercase',
               border: '1px solid rgba(0,212,255,0.15)',
@@ -198,7 +198,7 @@ export default function Landing() {
 
             {/* Subtext */}
             <p className="reveal reveal-d2" style={{
-              marginTop: '24px', fontSize: '16px', color: '#8A8A9A',
+              marginTop: '24px', fontSize: '17px', color: '#8A8A9A',
               lineHeight: 1.8, maxWidth: '420px',
             }}>
               Pick a template, fill in your details, download a polished PDF — in minutes, not hours.
@@ -213,7 +213,7 @@ export default function Landing() {
                   display: 'inline-flex', alignItems: 'center', gap: '10px',
                   background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
                   color: '#fff', padding: '14px 32px', borderRadius: '14px',
-                  fontSize: '15px', fontWeight: 700, textDecoration: 'none',
+                  fontSize: '16px', fontWeight: 700, textDecoration: 'none',
                   boxShadow: '0 0 40px rgba(0,212,255,0.25), 0 4px 16px rgba(0,212,255,0.15)',
                   transition: 'all 0.3s',
                 }}
@@ -230,7 +230,7 @@ export default function Landing() {
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '8px',
                   color: '#8A8A9A', padding: '14px 28px', borderRadius: '14px',
-                  fontSize: '15px', fontWeight: 600, textDecoration: 'none',
+                  fontSize: '16px', fontWeight: 600, textDecoration: 'none',
                   border: '1px solid #2A2A3A', transition: 'all 0.3s',
                   background: 'rgba(255,255,255,0.02)',
                 }}
@@ -250,7 +250,7 @@ export default function Landing() {
               ].map((stat, i) => (
                 <div key={i}>
                   <div style={{ fontSize: '22px', fontWeight: 800, color: '#00D4FF', fontFamily: "'JetBrains Mono', monospace", letterSpacing: '-0.03em' }}>{stat.value}</div>
-                  <div style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '2px', letterSpacing: '0.02em' }}>{stat.label}</div>
+                  <div style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '2px', letterSpacing: '0.02em' }}>{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -309,7 +309,7 @@ export default function Landing() {
       <section id="features" style={{ padding: '100px 24px', background: '#0A0A0F' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="reveal" style={{ maxWidth: '400px', marginBottom: '48px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Features</p>
+            <p style={{ fontSize: '13px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Features</p>
             <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Resume building,<br />reimagined.
             </h2>
@@ -341,8 +341,8 @@ export default function Landing() {
                     {f.icon2 && <path strokeLinecap="round" strokeLinejoin="round" d={f.icon2} />}
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
-                <p style={{ color: '#8A8A9A', lineHeight: 1.65, fontSize: '14px' }}>{f.desc}</p>
+                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{f.title}</h3>
+                <p style={{ color: '#8A8A9A', lineHeight: 1.65, fontSize: '15px' }}>{f.desc}</p>
               </div>
             ))}
           </div>
@@ -353,7 +353,7 @@ export default function Landing() {
       <section id="how-it-works" style={{ padding: '100px 24px', background: '#13131A' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '60px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>How It Works</p>
+            <p style={{ fontSize: '13px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>How It Works</p>
             <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Three steps. Five minutes.
             </h2>
@@ -379,8 +379,8 @@ export default function Landing() {
                     <path strokeLinecap="round" strokeLinejoin="round" d={step.icon} />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{step.title}</h3>
-                <p style={{ fontSize: '13px', color: '#8A8A9A', lineHeight: 1.65, maxWidth: '240px', margin: '0 auto' }}>{step.desc}</p>
+                <h3 style={{ fontSize: '17px', fontWeight: 700, color: '#F0F0F5', marginBottom: '8px', letterSpacing: '-0.01em' }}>{step.title}</h3>
+                <p style={{ fontSize: '14px', color: '#8A8A9A', lineHeight: 1.65, maxWidth: '280px', margin: '0 auto' }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -391,11 +391,11 @@ export default function Landing() {
       <section id="templates" style={{ padding: '100px 24px', background: '#0A0A0F' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
           <div className="reveal" style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <p style={{ fontSize: '11px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Templates</p>
+            <p style={{ fontSize: '13px', fontWeight: 700, color: '#00D4FF', textTransform: 'uppercase', letterSpacing: '0.12em', marginBottom: '12px' }}>Templates</p>
             <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', lineHeight: 1.12, letterSpacing: '-0.035em', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
               Six styles. Zero compromises.
             </h2>
-            <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '15px', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
+            <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '16px', maxWidth: '400px', marginLeft: 'auto', marginRight: 'auto', lineHeight: 1.7 }}>
               Designed for readability and ATS compatibility.
             </p>
           </div>
@@ -441,7 +441,7 @@ export default function Landing() {
                     opacity: 0, transition: 'opacity 0.3s',
                   }}>
                     <Link to="/builder" style={{
-                      color: '#fff', fontSize: '13px', fontWeight: 700,
+                      color: '#fff', fontSize: '14px', fontWeight: 700,
                       padding: '10px 22px', borderRadius: '10px',
                       background: 'linear-gradient(135deg, #00D4FF, #7B61FF)',
                       textDecoration: 'none',
@@ -457,11 +457,11 @@ export default function Landing() {
                 </div>
                 <div style={{ padding: '18px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                   <div>
-                    <h3 style={{ fontWeight: 700, fontSize: '14px', color: '#F0F0F5', letterSpacing: '-0.01em' }}>{t.name}</h3>
-                    <p style={{ color: '#8A8A9A', fontSize: '12px', marginTop: '3px', lineHeight: 1.4 }}>{t.desc}</p>
+                    <h3 style={{ fontWeight: 700, fontSize: '15px', color: '#F0F0F5', letterSpacing: '-0.01em' }}>{t.name}</h3>
+                    <p style={{ color: '#8A8A9A', fontSize: '13px', marginTop: '3px', lineHeight: 1.4 }}>{t.desc}</p>
                   </div>
                   <span style={{
-                    fontSize: '10px', fontWeight: 700, color: t.tagColor,
+                    fontSize: '12px', fontWeight: 700, color: t.tagColor,
                     backgroundColor: `${t.tagColor}12`, border: `1px solid ${t.tagColor}25`,
                     padding: '3px 10px', borderRadius: '50px', flexShrink: 0,
                     letterSpacing: '0.05em', textTransform: 'uppercase', whiteSpace: 'nowrap',
@@ -487,7 +487,7 @@ export default function Landing() {
           <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', fontWeight: 800, color: '#F0F0F5', letterSpacing: '-0.035em', lineHeight: 1.12, fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
             Your next job starts<br />with a better resume.
           </h2>
-          <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '15px', lineHeight: 1.7 }}>
+          <p style={{ marginTop: '14px', color: '#8A8A9A', fontSize: '16px', lineHeight: 1.7 }}>
             Takes five minutes. No account needed. No watermarks.
           </p>
           <Link
@@ -496,7 +496,7 @@ export default function Landing() {
               marginTop: '28px', display: 'inline-flex', alignItems: 'center', gap: '10px',
               background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '14px 32px', borderRadius: '14px',
-              fontSize: '15px', fontWeight: 700, textDecoration: 'none',
+              fontSize: '16px', fontWeight: 700, textDecoration: 'none',
               boxShadow: '0 0 40px rgba(0,212,255,0.25)',
               transition: 'all 0.3s',
             }}

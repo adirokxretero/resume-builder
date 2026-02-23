@@ -3,7 +3,7 @@ import Logo from './Logo'
 export default function Footer() {
   const linkStyle = {
     color: 'rgba(255,255,255,0.3)', textDecoration: 'none',
-    transition: 'color 0.2s', fontSize: '13px',
+    transition: 'color 0.2s', fontSize: '14px',
   }
 
   return (
@@ -12,7 +12,7 @@ export default function Footer() {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '24px' }}>
           <div>
             <Logo />
-            <p style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '10px', letterSpacing: '0.01em' }}>
+            <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '10px', letterSpacing: '0.01em' }}>
               Build professional resumes in minutes, not hours.
             </p>
           </div>
@@ -31,10 +31,10 @@ export default function Footer() {
           </div>
         </div>
         <div style={{ marginTop: '32px', paddingTop: '20px', borderTop: '1px solid rgba(255,255,255,0.04)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.15)' }}>
+          <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.15)' }}>
             &copy; {new Date().getFullYear()} ResumeForge. All rights reserved.
           </span>
-          <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.1)' }}>
+          <span style={{ fontSize: '13px', color: 'rgba(255,255,255,0.1)' }}>
             Designed with precision.
           </span>
         </div>

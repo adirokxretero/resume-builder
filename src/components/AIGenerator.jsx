@@ -122,7 +122,7 @@ export default function AIGenerator({ onGenerate }) {
         onClick={() => setOpen(true)}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
-          padding: '6px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+          padding: '6px 12px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
           cursor: 'pointer', border: '1px solid rgba(0,212,255,0.2)',
           background: 'rgba(0,212,255,0.06)',
           color: '#00D4FF', transition: 'all 0.2s', whiteSpace: 'nowrap',
@@ -159,10 +159,10 @@ export default function AIGenerator({ onGenerate }) {
           padding: '24px 24px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         }}>
           <div>
-            <h2 style={{ fontSize: '17px', fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.02em', fontFamily: "'DM Sans', sans-serif" }}>
+            <h2 style={{ fontSize: '18px', fontWeight: 700, color: '#F0F0F5', letterSpacing: '-0.02em', fontFamily: "'DM Sans', sans-serif" }}>
               AI Resume Generator
             </h2>
-            <p style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '4px' }}>
+            <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '4px' }}>
               Describe what you need — we'll write the rest
             </p>
           </div>
@@ -178,7 +178,7 @@ export default function AIGenerator({ onGenerate }) {
 
         <div style={{ padding: '20px 24px 24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
           <div>
-            <label style={{ display: 'block', fontSize: '11px', fontWeight: 600, color: '#8A8A9A', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+            <label style={{ display: 'block', fontSize: '13px', fontWeight: 600, color: '#8A8A9A', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
               What kind of resume?
             </label>
             <textarea
@@ -188,7 +188,7 @@ export default function AIGenerator({ onGenerate }) {
               rows={4}
               style={{
                 width: '100%', padding: '12px 13px', backgroundColor: 'rgba(255,255,255,0.04)',
-                border: '1px solid #2A2A3A', borderRadius: '10px', fontSize: '14px',
+                border: '1px solid #2A2A3A', borderRadius: '10px', fontSize: '15px',
                 color: '#F0F0F5', outline: 'none', resize: 'none', lineHeight: 1.6,
                 fontFamily: 'inherit', transition: 'border-color 0.2s',
               }}
@@ -198,7 +198,7 @@ export default function AIGenerator({ onGenerate }) {
           </div>
 
           <div>
-            <p style={{ fontSize: '10px', fontWeight: 600, color: 'rgba(255,255,255,0.2)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Quick ideas</p>
+            <p style={{ fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.2)', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.06em' }}>Quick ideas</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
               {[
                 'Full-stack developer, 3 years, Python & React',
@@ -212,7 +212,7 @@ export default function AIGenerator({ onGenerate }) {
                   onClick={() => setPrompt(q)}
                   style={{
                     padding: '5px 10px', borderRadius: '7px', border: '1px solid rgba(255,255,255,0.06)',
-                    background: 'rgba(255,255,255,0.03)', fontSize: '11px', color: 'rgba(255,255,255,0.4)', cursor: 'pointer',
+                    background: 'rgba(255,255,255,0.03)', fontSize: '13px', color: 'rgba(255,255,255,0.4)', cursor: 'pointer',
                     transition: 'all 0.15s', fontFamily: 'inherit',
                   }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)'; e.currentTarget.style.color = '#00D4FF'; e.currentTarget.style.background = 'rgba(0,212,255,0.06)' }}
@@ -227,7 +227,7 @@ export default function AIGenerator({ onGenerate }) {
           {error && (
             <div style={{
               padding: '10px 14px', borderRadius: '10px', backgroundColor: 'rgba(255,77,109,0.08)',
-              border: '1px solid rgba(255,77,109,0.2)', fontSize: '12px', color: '#FF4D6D', lineHeight: 1.5,
+              border: '1px solid rgba(255,77,109,0.2)', fontSize: '13px', color: '#FF4D6D', lineHeight: 1.5,
             }}>
               {error}
             </div>
@@ -241,7 +241,7 @@ export default function AIGenerator({ onGenerate }) {
               width: '100%', padding: '13px', borderRadius: '12px', border: 'none',
               background: loading ? 'rgba(255,255,255,0.1)' : 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff',
-              fontSize: '14px', fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
+              fontSize: '15px', fontWeight: 700, cursor: loading ? 'wait' : 'pointer',
               boxShadow: loading ? 'none' : '0 0 24px rgba(0,212,255,0.2)',
               transition: 'all 0.2s', letterSpacing: '0.01em',
             }}

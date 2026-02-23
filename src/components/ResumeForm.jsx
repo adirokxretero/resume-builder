@@ -11,11 +11,11 @@ const sectionTabs = [
 const inputStyle = {
   width: '100%', padding: '11px 14px',
   backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid #2A2A3A', borderRadius: '10px',
-  fontSize: '15px', color: '#F0F0F5', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
+  fontSize: '16px', color: '#F0F0F5', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
 }
 
 const labelStyle = {
-  display: 'block', fontSize: '12px', fontWeight: 600,
+  display: 'block', fontSize: '13px', fontWeight: 600,
   color: '#8A8A9A', marginBottom: '7px', letterSpacing: '0.02em', textTransform: 'uppercase',
   fontFamily: "'JetBrains Mono', monospace",
 }
@@ -53,7 +53,7 @@ function AddButton({ onClick, label }) {
     <button
       onClick={onClick}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px',
+        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px',
         color: '#00D4FF', fontWeight: 600, background: 'none', border: '1px dashed rgba(0,212,255,0.2)',
         padding: '12px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
         width: '100%', justifyContent: 'center',
@@ -77,7 +77,7 @@ function DeleteButton({ onClick }) {
       onMouseEnter={e => { e.currentTarget.style.color = '#FF4D6D'; e.currentTarget.style.background = 'rgba(255,77,109,0.1)' }}
       onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.2)'; e.currentTarget.style.background = 'transparent' }}
     >
-      <svg style={{ width: '14px', height: '14px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <svg style={{ width: '15px', height: '15px' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -117,10 +117,10 @@ function PersonalSection({ data, updatePersonal }) {
           </label>
         </div>
         <div>
-          <p style={{ fontSize: '14px', fontWeight: 600, color: '#F0F0F5' }}>Profile Photo</p>
-          <p style={{ fontSize: '12px', color: '#8A8A9A', marginTop: '2px' }}>Click to upload</p>
+          <p style={{ fontSize: '15px', fontWeight: 600, color: '#F0F0F5' }}>Profile Photo</p>
+          <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '2px' }}>Click to upload</p>
           {data.photo && (
-            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '11px', color: '#FF4D6D', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 600 }}>
+            <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '13px', color: '#FF4D6D', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 600 }}>
               Remove
             </button>
           )}
@@ -149,13 +149,13 @@ function SkillsSection({ skills, onChange }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <p style={{ fontSize: '13px', color: '#8A8A9A', lineHeight: 1.5 }}>Add your skills — they appear as tags on the resume.</p>
+      <p style={{ fontSize: '14px', color: '#8A8A9A', lineHeight: 1.5 }}>Add your skills — they appear as tags on the resume.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: 'rgba(255,255,255,0.04)', border: '1px solid #2A2A3A', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
               value={skill} onChange={e => updateSkill(i, e.target.value)} placeholder="Type skill..."
-              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#F0F0F5', fontFamily: 'inherit' }}
+              style={{ fontSize: '14px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#F0F0F5', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
               <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: 'rgba(255,255,255,0.2)', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
@@ -214,7 +214,7 @@ function ExperienceSection({ experience, onChange }) {
                 <input type="checkbox" checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
                   style={{ width: '14px', height: '14px', accentColor: '#00D4FF' }} />
-                <span style={{ fontSize: '12px', color: '#8A8A9A' }}>Currently here</span>
+                <span style={{ fontSize: '13px', color: '#8A8A9A' }}>Currently here</span>
               </label>
             </div>
           </div>
@@ -263,10 +263,10 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
       </div>
       {/* Step label */}
       <div style={{ padding: '8px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#13131A' }}>
-        <span style={{ fontSize: '10px', fontWeight: 700, color: '#8A8A9A', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: "'JetBrains Mono', monospace" }}>
+        <span style={{ fontSize: '12px', fontWeight: 700, color: '#8A8A9A', textTransform: 'uppercase', letterSpacing: '0.08em', fontFamily: "'JetBrains Mono', monospace" }}>
           Step {stepIndex + 1} of {sectionTabs.length}
         </span>
-        <span style={{ fontSize: '10px', fontWeight: 600, color: '#00D4FF', letterSpacing: '0.02em', fontFamily: "'JetBrains Mono', monospace" }}>
+        <span style={{ fontSize: '12px', fontWeight: 600, color: '#00D4FF', letterSpacing: '0.02em', fontFamily: "'JetBrains Mono', monospace" }}>
           {Math.round(progress)}%
         </span>
       </div>
@@ -280,7 +280,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               onClick={() => setActiveTab(tab.id)}
               style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '10px 14px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
+                padding: '10px 14px', fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
                 borderBottom: isActive ? '2px solid #00D4FF' : '2px solid transparent',

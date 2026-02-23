@@ -24,7 +24,7 @@ export default function SamplePicker({ onLoad }) {
         onClick={() => setOpen(!open)}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
-          padding: '6px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+          padding: '6px 12px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
           cursor: 'pointer', border: '1px solid #2A2A3A',
           background: open ? 'rgba(255,255,255,0.06)' : 'transparent',
           color: 'rgba(255,255,255,0.4)',
@@ -50,8 +50,8 @@ export default function SamplePicker({ onLoad }) {
           overflow: 'hidden', animation: 'dropIn 0.15s ease-out',
         }}>
           <div style={{ padding: '14px 16px 10px', borderBottom: '1px solid #2A2A3A' }}>
-            <p style={{ fontSize: '13px', fontWeight: 700, color: '#F0F0F5' }}>Load an example</p>
-            <p style={{ fontSize: '11px', color: '#8A8A9A', marginTop: '3px' }}>See how templates look with real data</p>
+            <p style={{ fontSize: '14px', fontWeight: 700, color: '#F0F0F5' }}>Load an example</p>
+            <p style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '3px' }}>See how templates look with real data</p>
           </div>
           <div style={{ padding: '6px' }}>
             {sampleResumes.map(sample => (
@@ -73,8 +73,8 @@ export default function SamplePicker({ onLoad }) {
                   {sample.emoji}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#F0F0F5' }}>{sample.data.personal.name}</div>
-                  <div style={{ fontSize: '11px', color: '#8A8A9A', marginTop: '1px' }}>{sample.label}</div>
+                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#F0F0F5' }}>{sample.data.personal.name}</div>
+                  <div style={{ fontSize: '13px', color: '#8A8A9A', marginTop: '1px' }}>{sample.label}</div>
                 </div>
                 <svg style={{ width: '12px', height: '12px', color: 'rgba(255,255,255,0.15)', flexShrink: 0 }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />

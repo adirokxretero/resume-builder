@@ -18,7 +18,7 @@ export default function TemplateSelector({ selected, onSelect }) {
             onClick={() => onSelect(t.id)}
             style={{
               display: 'flex', alignItems: 'center', gap: '6px',
-              padding: '6px 12px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+              padding: '6px 12px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
               cursor: 'pointer', transition: 'all 0.2s', whiteSpace: 'nowrap',
               border: isActive ? '1px solid rgba(0,212,255,0.4)' : '1px solid #2A2A3A',
               background: isActive ? 'rgba(0,212,255,0.08)' : 'transparent',

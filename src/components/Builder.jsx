@@ -15,6 +15,7 @@ export default function Builder() {
   const [exporting, setExporting] = useState(false)
   const [showPreview, setShowPreview] = useState(false)
   const [previewScale, setPreviewScale] = useState(0.5)
+  const [mobileMode, setMobileMode] = useState(false)
 
   const calculateScale = useCallback(() => {
     if (!previewContainerRef.current) return
@@ -62,6 +63,34 @@ export default function Builder() {
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F' }}>
+      {/* Mobile banner */}
+      <div className="mobile-banner" style={{
+        display: 'none',
+        padding: '10px 16px',
+        background: 'linear-gradient(135deg, rgba(0,212,255,0.08), rgba(123,97,255,0.08))',
+        borderBottom: '1px solid #2A2A3A',
+        alignItems: 'center', justifyContent: 'space-between',
+        gap: '10px',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <svg style={{ width: '16px', height: '16px', color: '#00D4FF' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+          </svg>
+          <span style={{ fontSize: '13px', fontWeight: 600, color: '#F0F0F5' }}>On mobile?</span>
+        </div>
+        <button
+          onClick={() => setMobileMode(!mobileMode)}
+          style={{
+            padding: '6px 14px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+            border: 'none', cursor: 'pointer', transition: 'all 0.2s',
+            background: mobileMode ? '#00D4FF' : 'rgba(0,212,255,0.1)',
+            color: mobileMode ? '#0A0A0F' : '#00D4FF',
+          }}
+        >
+          {mobileMode ? 'Mobile mode ON' : 'Switch to mobile view'}
+        </button>
+      </div>
+
       {/* Header */}
       <header style={{
         background: 'rgba(10,10,15,0.8)', backdropFilter: 'blur(20px) saturate(180%)',
@@ -93,7 +122,7 @@ export default function Builder() {
           <button
             onClick={() => setShowPreview(!showPreview)}
             className="mobile-toggle"
-            style={{ padding: '7px 13px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', cursor: 'pointer', fontSize: '13px', fontWeight: 600, color: 'rgba(255,255,255,0.5)', display: 'none' }}
+            style={{ padding: '7px 13px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.5)', display: mobileMode ? 'flex' : 'none' }}
           >
             {showPreview ? 'Edit' : 'Preview'}
           </button>
@@ -105,7 +134,7 @@ export default function Builder() {
               display: 'flex', alignItems: 'center', gap: '8px',
               background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '9px 20px', borderRadius: '9px',
-              fontSize: '13px', fontWeight: 700, border: 'none',
+              fontSize: '14px', fontWeight: 700, border: 'none',
               cursor: exporting ? 'wait' : 'pointer',
               boxShadow: '0 0 20px rgba(0,212,255,0.2)',
               opacity: exporting ? 0.7 : 1, transition: 'all 0.2s', letterSpacing: '0.01em',
@@ -131,24 +160,27 @@ export default function Builder() {
       {/* Body */}
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         <div style={{
-          width: '460px', flexShrink: 0,
+          width: mobileMode ? '100%' : '460px', flexShrink: mobileMode ? 1 : 0,
           background: '#13131A',
           borderRight: '1px solid #2A2A3A',
-          overflowY: 'auto', display: showPreview ? 'none' : 'block',
+          overflowY: 'auto', display: mobileMode ? (showPreview ? 'none' : 'block') : (showPreview ? 'none' : 'block'),
         }}>
           <ResumeForm data={data} updatePersonal={updatePersonal} updateSection={updateSection} />
         </div>
 
         <div
           ref={previewContainerRef}
-          style={{ flex: 1, overflow: 'auto', background: '#1C1C28', display: !showPreview ? undefined : 'block', padding: '32px' }}
+          style={{ flex: 1, overflow: 'auto', background: '#1C1C28', display: mobileMode ? (showPreview ? 'block' : 'none') : (!showPreview ? undefined : 'block'), padding: '32px' }}
         >
           <ResumePreview data={data} template={template} previewRef={previewRef} scale={previewScale} />
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 768px) { .mobile-toggle { display: flex !important; } }
+        @media (max-width: 768px) { 
+          .mobile-toggle { display: flex !important; }
+          .mobile-banner { display: flex !important; }
+        }
       `}</style>
     </div>
   )
