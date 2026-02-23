@@ -251,11 +251,26 @@ function ProjectsSection({ projects, onChange }) {
 
 export default function ResumeForm({ data, updatePersonal, updateSection }) {
   const [activeTab, setActiveTab] = useState('personal')
+  const stepIndex = sectionTabs.findIndex(t => t.id === activeTab)
+  const progress = ((stepIndex + 1) / sectionTabs.length) * 100
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      {/* Progress Bar */}
+      <div style={{ height: '2px', background: 'rgba(255,255,255,0.04)', flexShrink: 0 }}>
+        <div style={{ height: '100%', width: `${progress}%`, background: 'linear-gradient(90deg, #c05621, #e8944a)', transition: 'width 0.4s cubic-bezier(0.16, 1, 0.3, 1)', borderRadius: '0 1px 1px 0' }} />
+      </div>
+      {/* Step label */}
+      <div style={{ padding: '8px 18px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#17171a' }}>
+        <span style={{ fontSize: '10px', fontWeight: 700, color: 'rgba(255,255,255,0.2)', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+          Step {stepIndex + 1} of {sectionTabs.length}
+        </span>
+        <span style={{ fontSize: '10px', fontWeight: 600, color: '#e8944a', letterSpacing: '0.02em' }}>
+          {Math.round(progress)}%
+        </span>
+      </div>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', padding: '12px 16px 0', overflowX: 'auto', borderBottom: '1px solid rgba(255,255,255,0.06)', background: '#17171a' }}>
+      <div style={{ display: 'flex', gap: '2px', padding: '8px 16px 0', overflowX: 'auto', borderBottom: '1px solid rgba(255,255,255,0.06)', background: '#17171a' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
