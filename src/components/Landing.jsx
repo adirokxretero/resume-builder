@@ -105,6 +105,18 @@ export default function Landing() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative' }}>
+      {/* ── AI Banner ── */}
+      <div style={{
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 60,
+        padding: '6px 0', textAlign: 'center',
+        background: 'rgba(10,10,15,0.85)', borderBottom: '1px solid rgba(42,42,58,0.4)',
+        backdropFilter: 'blur(12px)',
+      }}>
+        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.02em' }}>
+          Built with AI-assisted development
+        </span>
+      </div>
+
       {/* ── Cursor Glow ── */}
       <div style={{
         position: 'fixed', width: '500px', height: '500px', borderRadius: '50%',
@@ -116,7 +128,7 @@ export default function Landing() {
 
       {/* ── Navbar ── */}
       <nav className="landing-nav" style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 50,
+        position: 'fixed', top: '28px', left: 0, right: 0, zIndex: 50,
         background: 'rgba(10,10,15,0.6)', backdropFilter: 'blur(24px) saturate(180%)',
         borderBottom: '1px solid #2A2A3A', height: '64px',
       }}>
@@ -154,7 +166,7 @@ export default function Landing() {
       </nav>
 
       {/* ── Hero ── */}
-      <section className="dot-grid" style={{ position: 'relative', paddingTop: '140px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px', overflow: 'hidden' }}>
+      <section className="dot-grid" style={{ position: 'relative', paddingTop: '168px', paddingBottom: '80px', paddingLeft: '24px', paddingRight: '24px', overflow: 'hidden' }}>
         {/* Ambient glow */}
         <div style={{ position: 'absolute', top: '30%', left: '50%', transform: 'translate(-50%, -50%)', width: '800px', height: '800px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, rgba(123,97,255,0.06) 40%, transparent 60%)', pointerEvents: 'none', animation: 'glow 5s ease-in-out infinite' }} />
 
