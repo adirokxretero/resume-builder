@@ -24,7 +24,7 @@ export default function SamplePicker({ onLoad }) {
         onClick={() => setOpen(!open)}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
-          padding: '7px 13px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+          padding: '7px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
           cursor: 'pointer', border: '1.5px solid #e2ddd7',
           background: open ? '#f5f0eb' : '#fff', color: '#6b6560',
           transition: 'all 0.2s', whiteSpace: 'nowrap',

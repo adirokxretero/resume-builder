@@ -122,7 +122,7 @@ export default function AIGenerator({ onGenerate }) {
         onClick={() => setOpen(true)}
         style={{
           display: 'flex', alignItems: 'center', gap: '6px',
-          padding: '7px 13px', borderRadius: '8px', fontSize: '13px', fontWeight: 600,
+          padding: '7px 14px', borderRadius: '8px', fontSize: '14px', fontWeight: 600,
           cursor: 'pointer', border: '1.5px solid #e2ddd7',
           background: 'linear-gradient(135deg, #fdf2ec 0%, #fff 100%)',
           color: '#c05621', transition: 'all 0.2s', whiteSpace: 'nowrap',

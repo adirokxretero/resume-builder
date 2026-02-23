@@ -9,14 +9,14 @@ const sectionTabs = [
 ]
 
 const inputStyle = {
-  width: '100%', padding: '10px 13px',
+  width: '100%', padding: '11px 14px',
   backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px',
-  fontSize: '14px', color: '#2c2c2c', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
+  fontSize: '15px', color: '#2c2c2c', outline: 'none', transition: 'all 0.2s', fontFamily: 'inherit',
 }
 
 const labelStyle = {
-  display: 'block', fontSize: '12px', fontWeight: 600,
-  color: '#6b6560', marginBottom: '6px', letterSpacing: '0.01em',
+  display: 'block', fontSize: '13px', fontWeight: 600,
+  color: '#6b6560', marginBottom: '7px', letterSpacing: '0.01em',
 }
 
 function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
@@ -52,9 +52,9 @@ function AddButton({ onClick, label }) {
     <button
       onClick={onClick}
       style={{
-        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px',
+        display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '14px',
         color: '#c05621', fontWeight: 600, background: 'none', border: '1.5px dashed #e0c8b8',
-        padding: '10px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
+        padding: '12px 18px', borderRadius: '10px', cursor: 'pointer', transition: 'all 0.2s',
         width: '100%', justifyContent: 'center',
       }}
       onMouseEnter={e => { e.currentTarget.style.background = '#fdf2ec'; e.currentTarget.style.borderColor = '#c05621' }}
@@ -116,8 +116,8 @@ function PersonalSection({ data, updatePersonal }) {
           </label>
         </div>
         <div>
-          <p style={{ fontSize: '14px', fontWeight: 600, color: '#2c2c2c' }}>Profile Photo</p>
-          <p style={{ fontSize: '12px', color: '#a3a098', marginTop: '2px' }}>Click circle to upload</p>
+          <p style={{ fontSize: '15px', fontWeight: 600, color: '#2c2c2c' }}>Profile Photo</p>
+          <p style={{ fontSize: '13px', color: '#a3a098', marginTop: '2px' }}>Click circle to upload</p>
           {data.photo && (
             <button onClick={() => updatePersonal('photo', null)} style={{ fontSize: '12px', color: '#c05621', background: 'none', border: 'none', cursor: 'pointer', marginTop: '4px', fontWeight: 500 }}>
               Remove
@@ -148,13 +148,13 @@ function SkillsSection({ skills, onChange }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-      <p style={{ fontSize: '13px', color: '#6b6560', lineHeight: 1.5 }}>Add your skills — they show up as tags on the resume.</p>
+      <p style={{ fontSize: '14px', color: '#6b6560', lineHeight: 1.5 }}>Add your skills — they show up as tags on the resume.</p>
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {skills.map((skill, i) => (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '4px', backgroundColor: '#fff', border: '1.5px solid #e2ddd7', borderRadius: '10px', paddingLeft: '12px', paddingRight: '4px', paddingTop: '6px', paddingBottom: '6px' }}>
             <input
               value={skill} onChange={e => updateSkill(i, e.target.value)} placeholder="Type skill..."
-              style={{ fontSize: '13px', border: 'none', outline: 'none', background: 'transparent', width: '110px', color: '#2c2c2c', fontFamily: 'inherit' }}
+              style={{ fontSize: '14px', border: 'none', outline: 'none', background: 'transparent', width: '120px', color: '#2c2c2c', fontFamily: 'inherit' }}
             />
             {skills.length > 1 && (
               <button onClick={() => removeSkill(i)} style={{ padding: '3px', color: '#a3a098', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', borderRadius: '4px', transition: 'all 0.15s' }}
@@ -213,7 +213,7 @@ function ExperienceSection({ experience, onChange }) {
                 <input type="checkbox" checked={exp.current}
                   onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
                   style={{ width: '15px', height: '15px', accentColor: '#c05621' }} />
-                <span style={{ fontSize: '12px', color: '#6b6560' }}>Currently here</span>
+                <span style={{ fontSize: '13px', color: '#6b6560' }}>Currently here</span>
               </label>
             </div>
           </div>
@@ -264,7 +264,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               onClick={() => setActiveTab(tab.id)}
               style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '9px 14px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
+                padding: '10px 16px', fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
                 borderBottom: isActive ? '2px solid #c05621' : '2px solid transparent',

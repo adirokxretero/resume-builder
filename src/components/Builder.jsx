@@ -102,8 +102,8 @@ export default function Builder() {
             disabled={exporting}
             style={{
               display: 'flex', alignItems: 'center', gap: '8px',
-              backgroundColor: '#c05621', color: '#fff', padding: '9px 18px', borderRadius: '9px',
-              fontSize: '13px', fontWeight: 700, border: 'none',
+              backgroundColor: '#c05621', color: '#fff', padding: '10px 20px', borderRadius: '9px',
+              fontSize: '14px', fontWeight: 700, border: 'none',
               cursor: exporting ? 'wait' : 'pointer',
               boxShadow: '0 2px 8px rgba(192,86,33,0.25)',
               opacity: exporting ? 0.7 : 1, transition: 'all 0.2s', letterSpacing: '-0.01em',
