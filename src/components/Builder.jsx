@@ -64,11 +64,15 @@ export default function Builder() {
     setExporting(true)
     const el = previewRef.current
 
-    // Remove preview scale so html2canvas captures at full A4 size
-    const origTransform = el.style.transform
-    const origTransformOrigin = el.style.transformOrigin
-    el.style.transform = 'none'
-    el.style.transformOrigin = 'top left'
+    // Capture from an off-screen clone to avoid layout shifts in the visible UI.
+    const clone = el.cloneNode(true)
+    clone.style.transform = 'none'
+    clone.style.transformOrigin = 'top left'
+    clone.style.position = 'fixed'
+    clone.style.left = '-10000px'
+    clone.style.top = '0'
+    clone.style.zIndex = '-1'
+    document.body.appendChild(clone)
 
     try {
       const html2pdf = (await import('html2pdf.js')).default
@@ -80,19 +84,18 @@ export default function Builder() {
           scale: 2,
           useCORS: true,
           logging: false,
-          width: el.scrollWidth,
-          height: el.scrollHeight,
-          windowWidth: el.scrollWidth,
+          width: clone.scrollWidth,
+          height: clone.scrollHeight,
+          windowWidth: clone.scrollWidth,
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }).from(el).save()
+      }).from(clone).save()
       setToast({ type: 'success', text: 'PDF downloaded successfully.' })
     } catch (err) {
       console.error('PDF export failed:', err)
       setToast({ type: 'error', text: 'PDF download failed. Please try again.' })
     } finally {
-      el.style.transform = origTransform
-      el.style.transformOrigin = origTransformOrigin
+      clone.remove()
       setExporting(false)
     }
   }, [data.personal.name, exporting])
@@ -108,14 +111,13 @@ export default function Builder() {
     }
   }
 
+  const hasAnyText = (obj) => Object.values(obj).some(v => typeof v === 'string' && v.trim())
   const hasContent =
-    Boolean(data.personal.name?.trim()) ||
-    Boolean(data.personal.email?.trim()) ||
-    Boolean(data.personal.summary?.trim()) ||
+    hasAnyText(data.personal) ||
     data.skills.some(s => s?.trim()) ||
-    data.education.some(e => Object.values(e).some(v => String(v || '').trim())) ||
-    data.experience.some(e => Object.values(e).some(v => String(v || '').trim())) ||
-    data.projects.some(p => Object.values(p).some(v => String(v || '').trim()))
+    data.education.some(hasAnyText) ||
+    data.experience.some(hasAnyText) ||
+    data.projects.some(hasAnyText)
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F' }}>
@@ -164,16 +166,7 @@ export default function Builder() {
         display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '10px',
         flexShrink: 0, zIndex: 50, overflow: 'visible',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <Link
-            to="/"
-            style={{
-              color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: '13px',
-              border: '1px solid #2A2A3A', borderRadius: '8px', padding: '6px 10px',
-            }}
-          >
-            ← Home
-          </Link>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', minWidth: 0 }}>
           <Logo />
           <div style={{ width: '1px', height: '22px', backgroundColor: '#2A2A3A' }} />
           <SamplePicker onLoad={handleLoadSample} />
@@ -201,6 +194,7 @@ export default function Builder() {
               background: showPreview ? 'rgba(0,212,255,0.12)' : 'rgba(255,255,255,0.05)',
               cursor: 'pointer', fontSize: '14px', fontWeight: 600,
               color: showPreview ? '#00D4FF' : 'rgba(255,255,255,0.5)',
+              boxShadow: showPreview ? '0 0 0 2px rgba(0,212,255,0.18)' : 'none',
               display: mobileMode ? 'flex' : 'none',
             }}
           >
@@ -240,8 +234,10 @@ export default function Builder() {
       <div style={{
         padding: '6px 16px', background: '#0A0A0F',
         borderBottom: '1px solid #2A2A3A', flexShrink: 0,
-        overflowX: 'auto',
+        overflowX: 'auto', display: 'flex', alignItems: 'center', gap: '10px',
       }}>
+        <Link to="/" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: '13px', whiteSpace: 'nowrap' }}>← Home</Link>
+        <div style={{ width: '1px', height: '16px', backgroundColor: '#2A2A3A', flexShrink: 0 }} />
         <TemplateSelector selected={template} onSelect={setTemplate} />
       </div>
 

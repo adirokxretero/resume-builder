@@ -26,6 +26,7 @@ function Input({ label, value, onChange, type = 'text', placeholder = '', onBlur
       <label style={labelStyle}>{label}</label>
       <input
         type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
+        aria-invalid={error ? 'true' : 'false'}
         style={inputStyle}
         onFocus={e => { e.target.style.borderColor = 'rgba(0,212,255,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.1)' }}
         onBlur={e => { e.target.style.borderColor = '#2A2A3A'; e.target.style.boxShadow = 'none'; if (onBlur) onBlur(e) }}
@@ -325,7 +326,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
         </span>
       </div>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', padding: '8px 12px 0', overflowX: 'auto', borderBottom: '1px solid #2A2A3A', background: '#13131A' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, minmax(0, 1fr))', gap: '2px', padding: '8px 10px 0', borderBottom: '1px solid #2A2A3A', background: '#13131A' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
@@ -333,8 +334,8 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '8px 10px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
+                display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px',
+                padding: '8px 6px', fontSize: '12px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
                 borderBottom: isActive ? '2px solid #00D4FF' : '2px solid transparent',

@@ -13,6 +13,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -21,6 +22,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #F0F0F5;
   background: #0A0A0F;
+  overflow-x: hidden;
 }
 
 input, textarea, select, button {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 import Footer from './Footer'
@@ -60,9 +60,6 @@ const steps = [
 
 export default function Landing() {
   const [mousePos, setMousePos] = useState({ x: -500, y: -500 })
-  const [count, setCount] = useState(0)
-  const [counterStarted, setCounterStarted] = useState(false)
-  const counterRef = useRef(null)
 
   useEffect(() => {
     const handleMove = (e) => setMousePos({ x: e.clientX, y: e.clientY })
@@ -80,28 +77,6 @@ export default function Landing() {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
     return () => observer.disconnect()
   }, [])
-
-  useEffect(() => {
-    if (!counterRef.current) return
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting && !counterStarted) setCounterStarted(true) },
-      { threshold: 0.5 }
-    )
-    observer.observe(counterRef.current)
-    return () => observer.disconnect()
-  }, [counterStarted])
-
-  useEffect(() => {
-    if (!counterStarted) return
-    const target = 2400
-    let current = 0
-    const timer = setInterval(() => {
-      current += 48
-      if (current >= target) { setCount(target); clearInterval(timer) }
-      else setCount(current)
-    }, 16)
-    return () => clearInterval(timer)
-  }, [counterStarted])
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative', overflowX: 'hidden' }}>
@@ -193,19 +168,19 @@ export default function Landing() {
               fontFamily: "'DM Sans', 'Inter', sans-serif",
               minHeight: '3.2em',
             }}>
-              <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both' }}>Your resume</span>
+              <span style={{ display: 'inline-block' }}>Your resume</span>
               <br />
-              <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.5s both' }}>should&nbsp;</span>
+              <span style={{ display: 'inline-block' }}>should&nbsp;</span>
               <span style={{
                 display: 'inline-block',
                 background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 40%, #00D4FF 80%, #7B61FF 100%)',
                 backgroundSize: '250% auto',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.7s both, shimmer 4s linear 1.4s infinite',
+                animation: 'shimmer 4s linear 1.4s infinite',
               }}>look as good</span>
               <br />
-              <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.9s both' }}>as your experience.</span>
+              <span style={{ display: 'inline-block' }}>as your experience.</span>
             </h1>
 
             {/* Subtext */}
@@ -254,7 +229,7 @@ export default function Landing() {
             </div>
 
             {/* Social Proof */}
-            <div ref={counterRef} className="reveal reveal-d4" style={{ marginTop: '40px', display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
+            <div className="reveal reveal-d4" style={{ marginTop: '40px', display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
               {[
                 { value: '2,400+', label: 'Resumes built' },
                 { value: '6', label: 'Templates' },
@@ -379,7 +354,7 @@ export default function Landing() {
             }} />
             {steps.map((step, i) => (
               <div key={i} className={`reveal reveal-d${i + 1}`} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(0,212,255,0.05)', lineHeight: 1, fontFamily: "'JetBrains Mono', monospace", marginBottom: '8px' }}>
+                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(0,212,255,0.05)', lineHeight: 1, fontFamily: "'JetBrains Mono', monospace", marginBottom: '14px' }}>
                   {step.num}
                 </div>
                 <div style={{
