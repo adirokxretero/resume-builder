@@ -20,7 +20,7 @@ const labelStyle = {
   fontFamily: "'JetBrains Mono', monospace",
 }
 
-function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
+function Input({ label, value, onChange, type = 'text', placeholder = '', onBlur, error = '' }) {
   return (
     <div>
       <label style={labelStyle}>{label}</label>
@@ -28,8 +28,9 @@ function Input({ label, value, onChange, type = 'text', placeholder = '' }) {
         type={type} value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
         style={inputStyle}
         onFocus={e => { e.target.style.borderColor = 'rgba(0,212,255,0.5)'; e.target.style.boxShadow = '0 0 0 3px rgba(0,212,255,0.1)' }}
-        onBlur={e => { e.target.style.borderColor = '#2A2A3A'; e.target.style.boxShadow = 'none' }}
+        onBlur={e => { e.target.style.borderColor = '#2A2A3A'; e.target.style.boxShadow = 'none'; if (onBlur) onBlur(e) }}
       />
+      {error && <p style={{ marginTop: '6px', fontSize: '12px', color: '#FF4D6D' }}>{error}</p>}
     </div>
   )
 }
@@ -90,6 +91,26 @@ const cardStyle = {
 }
 
 function PersonalSection({ data, updatePersonal }) {
+  const [errors, setErrors] = useState({ email: '', phone: '', website: '' })
+
+  const validate = (field, value) => {
+    const v = value.trim()
+    if (!v) return ''
+    if (field === 'email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? '' : 'Enter a valid email address'
+    if (field === 'phone') return /^[+]?[\d\s()-]{7,20}$/.test(v) ? '' : 'Enter a valid phone number'
+    if (field === 'website') return /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/.*)?$/.test(v) ? '' : 'Enter a valid website URL'
+    return ''
+  }
+
+  const handleBlur = (field, value) => {
+    setErrors(prev => ({ ...prev, [field]: validate(field, value) }))
+  }
+
+  const handleValidatedChange = (field, value) => {
+    updatePersonal(field, value)
+    if (errors[field]) setErrors(prev => ({ ...prev, [field]: validate(field, value) }))
+  }
+
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0]
     if (!file) return
@@ -129,10 +150,32 @@ function PersonalSection({ data, updatePersonal }) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
         <Input label="Full Name" value={data.name} onChange={v => updatePersonal('name', v)} placeholder="John Doe" />
         <Input label="Job Title" value={data.title} onChange={v => updatePersonal('title', v)} placeholder="Software Engineer" />
-        <Input label="Email" value={data.email} onChange={v => updatePersonal('email', v)} type="email" placeholder="john@example.com" />
-        <Input label="Phone" value={data.phone} onChange={v => updatePersonal('phone', v)} placeholder="+1 (555) 123-4567" />
+        <Input
+          label="Email"
+          value={data.email}
+          onChange={v => handleValidatedChange('email', v)}
+          onBlur={() => handleBlur('email', data.email)}
+          error={errors.email}
+          type="email"
+          placeholder="john@example.com"
+        />
+        <Input
+          label="Phone"
+          value={data.phone}
+          onChange={v => handleValidatedChange('phone', v)}
+          onBlur={() => handleBlur('phone', data.phone)}
+          error={errors.phone}
+          placeholder="+1 (555) 123-4567"
+        />
         <Input label="Location" value={data.location} onChange={v => updatePersonal('location', v)} placeholder="San Francisco, CA" />
-        <Input label="Website" value={data.website} onChange={v => updatePersonal('website', v)} placeholder="johndoe.com" />
+        <Input
+          label="Website"
+          value={data.website}
+          onChange={v => handleValidatedChange('website', v)}
+          onBlur={() => handleBlur('website', data.website)}
+          error={errors.website}
+          placeholder="johndoe.com"
+        />
         <div style={{ gridColumn: 'span 2' }}>
           <Input label="LinkedIn" value={data.linkedin} onChange={v => updatePersonal('linkedin', v)} placeholder="linkedin.com/in/johndoe" />
         </div>
@@ -172,7 +215,7 @@ function SkillsSection({ skills, onChange }) {
 }
 
 function EducationSection({ education, onChange }) {
-  const addEntry = () => onChange([...education, { institution: '', degree: '', field: '', startDate: '', endDate: '', gpa: '' }])
+  const addEntry = () => onChange([...education, { institution: '', degree: '', field: '', startDate: '', endDate: '', gpa: '', current: false }])
   const removeEntry = (idx) => onChange(education.filter((_, i) => i !== idx))
   const updateEntry = (idx, field, val) => onChange(education.map((e, i) => i === idx ? { ...e, [field]: val } : e))
   return (
@@ -186,7 +229,18 @@ function EducationSection({ education, onChange }) {
             <Input label="Field of Study" value={edu.field} onChange={v => updateEntry(i, 'field', v)} placeholder="Computer Science" />
             <Input label="GPA (optional)" value={edu.gpa} onChange={v => updateEntry(i, 'gpa', v)} placeholder="3.8/4.0" />
             <Input label="Start Date" value={edu.startDate} onChange={v => updateEntry(i, 'startDate', v)} placeholder="Sep 2018" />
-            <Input label="End Date" value={edu.endDate} onChange={v => updateEntry(i, 'endDate', v)} placeholder="Jun 2022" />
+            <div>
+              <Input label="End Date" value={edu.current ? '' : edu.endDate} onChange={v => updateEntry(i, 'endDate', v)} placeholder="Jun 2022" />
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '8px', cursor: 'pointer' }}>
+                <input
+                  type="checkbox"
+                  checked={Boolean(edu.current)}
+                  onChange={e => { updateEntry(i, 'current', e.target.checked); if (e.target.checked) updateEntry(i, 'endDate', 'Present') }}
+                  style={{ width: '14px', height: '14px', accentColor: '#00D4FF' }}
+                />
+                <span style={{ fontSize: '13px', color: '#8A8A9A' }}>Currently enrolled</span>
+              </label>
+            </div>
           </div>
         </div>
       ))}
@@ -271,7 +325,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
         </span>
       </div>
       {/* Tabs */}
-      <div style={{ display: 'flex', gap: '2px', padding: '8px 16px 0', overflowX: 'auto', borderBottom: '1px solid #2A2A3A', background: '#13131A' }}>
+      <div style={{ display: 'flex', gap: '2px', padding: '8px 12px 0', overflowX: 'auto', borderBottom: '1px solid #2A2A3A', background: '#13131A' }}>
         {sectionTabs.map(tab => {
           const isActive = activeTab === tab.id
           return (
@@ -280,7 +334,7 @@ export default function ResumeForm({ data, updatePersonal, updateSection }) {
               onClick={() => setActiveTab(tab.id)}
               style={{
                 display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '10px 14px', fontSize: '14px', fontWeight: 600, whiteSpace: 'nowrap',
+                padding: '8px 10px', fontSize: '13px', fontWeight: 600, whiteSpace: 'nowrap',
                 cursor: 'pointer', transition: 'all 0.2s', borderRadius: '8px 8px 0 0',
                 border: 'none', marginBottom: '-1px',
                 borderBottom: isActive ? '2px solid #00D4FF' : '2px solid transparent',

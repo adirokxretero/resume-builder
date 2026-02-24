@@ -18,7 +18,7 @@ export default function ResumePreview({ data, template, previewRef, scale = 0.5 
   const Template = templateMap[template] || ModernTemplate
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', minHeight: '100%' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', minHeight: '100%', position: 'sticky', top: '8px' }}>
       <div
         ref={previewRef}
         style={{

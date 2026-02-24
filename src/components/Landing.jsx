@@ -44,12 +44,12 @@ const features = [
 ]
 
 const templateData = [
-  { name: 'Modern', desc: 'Two-column sidebar. Confident & tech-friendly.', color: '#1e3a5f', tag: 'Popular', tagColor: '#00FFB2' },
-  { name: 'Classic', desc: 'Serif headings. Timeless & respected.', color: '#2c2c2c', tag: 'Versatile', tagColor: '#8A8A9A' },
-  { name: 'Minimal', desc: 'Clean whitespace. Quiet confidence.', color: '#5f7161', tag: 'Elegant', tagColor: '#86efac' },
-  { name: 'Bold', desc: 'Colored banner. Strong impression.', color: '#c05621', tag: 'Standout', tagColor: '#00D4FF' },
-  { name: 'Executive', desc: 'Gold accents. Built for leadership.', color: '#9a7b4f', tag: 'Premium', tagColor: '#7B61FF' },
-  { name: 'Creative', desc: 'Teal gradient. Modern & fresh.', color: '#0d9488', tag: 'Fresh', tagColor: '#5eead4' },
+  { id: 'modern', name: 'Modern', desc: 'Two-column sidebar. Confident & tech-friendly.', color: '#1e3a5f', tag: 'Popular', tagColor: '#00FFB2' },
+  { id: 'classic', name: 'Classic', desc: 'Serif headings. Timeless & respected.', color: '#2c2c2c', tag: 'Versatile', tagColor: '#8A8A9A' },
+  { id: 'minimal', name: 'Minimal', desc: 'Clean whitespace. Quiet confidence.', color: '#5f7161', tag: 'Elegant', tagColor: '#86efac' },
+  { id: 'bold', name: 'Bold', desc: 'Colored banner. Strong impression.', color: '#c05621', tag: 'Standout', tagColor: '#00D4FF' },
+  { id: 'executive', name: 'Executive', desc: 'Gold accents. Built for leadership.', color: '#9a7b4f', tag: 'Premium', tagColor: '#7B61FF' },
+  { id: 'creative', name: 'Creative', desc: 'Teal gradient. Modern & fresh.', color: '#0d9488', tag: 'Fresh', tagColor: '#5eead4' },
 ]
 
 const steps = [
@@ -104,7 +104,7 @@ export default function Landing() {
   }, [counterStarted])
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F', position: 'relative', overflowX: 'hidden' }}>
       {/* ── AI Banner ── */}
       <div style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 60,
@@ -191,6 +191,7 @@ export default function Landing() {
               fontSize: 'clamp(2.6rem, 6.5vw, 4.2rem)', fontWeight: 800,
               color: '#F0F0F5', lineHeight: 1.06, letterSpacing: '-0.04em',
               fontFamily: "'DM Sans', 'Inter', sans-serif",
+              minHeight: '3.2em',
             }}>
               <span className="text-anim" style={{ display: 'inline-block', animation: 'textReveal 0.7s cubic-bezier(0.16,1,0.3,1) 0.3s both' }}>Your resume</span>
               <br />
@@ -255,7 +256,7 @@ export default function Landing() {
             {/* Social Proof */}
             <div ref={counterRef} className="reveal reveal-d4" style={{ marginTop: '40px', display: 'flex', gap: '32px', flexWrap: 'wrap' }}>
               {[
-                { value: `${count.toLocaleString()}+`, label: 'Resumes built' },
+                { value: '2,400+', label: 'Resumes built' },
                 { value: '6', label: 'Templates' },
                 { value: '100%', label: 'Free forever' },
               ].map((stat, i) => (
@@ -378,7 +379,7 @@ export default function Landing() {
             }} />
             {steps.map((step, i) => (
               <div key={i} className={`reveal reveal-d${i + 1}`} style={{ textAlign: 'center', position: 'relative', zIndex: 1 }}>
-                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(0,212,255,0.05)', lineHeight: 1, fontFamily: "'JetBrains Mono', monospace", marginBottom: '-8px' }}>
+                <div style={{ fontSize: '56px', fontWeight: 900, color: 'rgba(0,212,255,0.05)', lineHeight: 1, fontFamily: "'JetBrains Mono', monospace", marginBottom: '8px' }}>
                   {step.num}
                 </div>
                 <div style={{
@@ -432,16 +433,27 @@ export default function Landing() {
                     <div style={{
                       width: '100px', height: '130px', backgroundColor: '#fff', borderRadius: '4px',
                       boxShadow: '0 16px 40px rgba(0,0,0,0.3)',
-                      display: 'flex', flexDirection: 'column', padding: '10px', gap: '5px',
+                      display: 'flex', flexDirection: 'column', overflow: 'hidden',
                       animation: `floatSlow 4s ease-in-out infinite`,
                       animationDelay: `${i * 0.4}s`,
                     }}>
-                      <div style={{ width: '20px', height: '20px', borderRadius: '50%', backgroundColor: '#eee', margin: '0 auto' }} />
-                      <div style={{ height: '3px', backgroundColor: '#eee', borderRadius: '2px', width: '100%' }} />
-                      <div style={{ height: '2px', backgroundColor: '#f5f5f5', borderRadius: '1px', width: '75%' }} />
-                      <div style={{ height: '2px', backgroundColor: '#f5f5f5', borderRadius: '1px', width: '100%' }} />
-                      <div style={{ height: '2px', backgroundColor: '#f5f5f5', borderRadius: '1px', width: '60%' }} />
-                      <div style={{ height: '2px', backgroundColor: '#f5f5f5', borderRadius: '1px', width: '85%' }} />
+                      {t.id === 'bold' && <div style={{ height: '18px', background: '#c05621' }} />}
+                      {t.id === 'executive' && <div style={{ height: '2px', background: '#9a7b4f' }} />}
+                      {t.id === 'creative' && <div style={{ height: '12px', background: 'linear-gradient(90deg,#0d9488,#14b8a6)' }} />}
+                      <div style={{ display: 'flex', flex: 1 }}>
+                        {t.id === 'modern' && <div style={{ width: '26px', background: '#1e3a5f' }} />}
+                        <div style={{ flex: 1, padding: '8px 6px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                          <div style={{ height: '3px', backgroundColor: t.id === 'classic' ? '#d6d6d6' : '#ececec', borderRadius: '2px', width: t.id === 'minimal' ? '72%' : '100%' }} />
+                          <div style={{ height: '2px', backgroundColor: '#f2f2f2', borderRadius: '1px', width: t.id === 'executive' ? '58%' : '90%' }} />
+                          <div style={{ height: '2px', backgroundColor: '#f2f2f2', borderRadius: '1px', width: t.id === 'bold' ? '78%' : '100%' }} />
+                          <div style={{ height: '2px', backgroundColor: '#f2f2f2', borderRadius: '1px', width: t.id === 'creative' ? '64%' : '82%' }} />
+                          <div style={{ marginTop: '4px', display: 'flex', gap: '3px', flexWrap: 'wrap' }}>
+                            <div style={{ width: '18px', height: '6px', borderRadius: '3px', background: '#efefef' }} />
+                            <div style={{ width: t.id === 'minimal' ? '28px' : '20px', height: '6px', borderRadius: '3px', background: '#efefef' }} />
+                            <div style={{ width: '16px', height: '6px', borderRadius: '3px', background: '#efefef' }} />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                   {/* Hover overlay */}

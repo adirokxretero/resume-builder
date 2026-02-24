@@ -16,6 +16,7 @@ export default function Builder() {
   const [showPreview, setShowPreview] = useState(false)
   const [previewScale, setPreviewScale] = useState(0.5)
   const [mobileMode, setMobileMode] = useState(false)
+  const [toast, setToast] = useState(null)
 
   const calculateScale = useCallback(() => {
     if (!previewContainerRef.current) return
@@ -30,6 +31,12 @@ export default function Builder() {
     window.addEventListener('resize', calculateScale)
     return () => window.removeEventListener('resize', calculateScale)
   }, [calculateScale])
+
+  useEffect(() => {
+    if (!toast) return
+    const t = setTimeout(() => setToast(null), 2600)
+    return () => clearTimeout(t)
+  }, [toast])
 
   const showAdThenDownload = useCallback((downloadFn) => {
     const AD_COOLDOWN_MS = 10 * 60 * 1000
@@ -79,8 +86,10 @@ export default function Builder() {
         },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       }).from(el).save()
+      setToast({ type: 'success', text: 'PDF downloaded successfully.' })
     } catch (err) {
       console.error('PDF export failed:', err)
+      setToast({ type: 'error', text: 'PDF download failed. Please try again.' })
     } finally {
       el.style.transform = origTransform
       el.style.transformOrigin = origTransformOrigin
@@ -89,7 +98,7 @@ export default function Builder() {
   }, [data.personal.name, exporting])
 
   const handleReset = () => {
-    if (window.confirm('Clear all data? This cannot be undone.')) resetData()
+    if (window.confirm('Are you sure? This will erase all your data.')) resetData()
   }
 
   const handleLoadSample = (sample) => {
@@ -98,6 +107,15 @@ export default function Builder() {
       setTemplate(sample.template)
     }
   }
+
+  const hasContent =
+    Boolean(data.personal.name?.trim()) ||
+    Boolean(data.personal.email?.trim()) ||
+    Boolean(data.personal.summary?.trim()) ||
+    data.skills.some(s => s?.trim()) ||
+    data.education.some(e => Object.values(e).some(v => String(v || '').trim())) ||
+    data.experience.some(e => Object.values(e).some(v => String(v || '').trim())) ||
+    data.projects.some(p => Object.values(p).some(v => String(v || '').trim()))
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', fontFamily: "'Inter', system-ui, sans-serif", background: '#0A0A0F' }}>
@@ -147,6 +165,15 @@ export default function Builder() {
         flexShrink: 0, zIndex: 50, overflow: 'visible',
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Link
+            to="/"
+            style={{
+              color: 'rgba(255,255,255,0.55)', textDecoration: 'none', fontSize: '13px',
+              border: '1px solid #2A2A3A', borderRadius: '8px', padding: '6px 10px',
+            }}
+          >
+            ← Home
+          </Link>
           <Logo />
           <div style={{ width: '1px', height: '22px', backgroundColor: '#2A2A3A' }} />
           <SamplePicker onLoad={handleLoadSample} />
@@ -168,23 +195,28 @@ export default function Builder() {
           <button
             onClick={() => setShowPreview(!showPreview)}
             className="mobile-toggle"
-            style={{ padding: '7px 13px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)', cursor: 'pointer', fontSize: '14px', fontWeight: 600, color: 'rgba(255,255,255,0.5)', display: mobileMode ? 'flex' : 'none' }}
+            style={{
+              padding: '7px 13px', borderRadius: '8px',
+              border: showPreview ? '1px solid rgba(0,212,255,0.45)' : '1px solid rgba(255,255,255,0.1)',
+              background: showPreview ? 'rgba(0,212,255,0.12)' : 'rgba(255,255,255,0.05)',
+              cursor: 'pointer', fontSize: '14px', fontWeight: 600,
+              color: showPreview ? '#00D4FF' : 'rgba(255,255,255,0.5)',
+              display: mobileMode ? 'flex' : 'none',
+            }}
           >
             {showPreview ? 'Edit' : 'Preview'}
           </button>
-
-          <span style={{ fontSize: '10px', color: 'rgba(255,255,255,0.25)', textAlign: 'center', lineHeight: 1.3 }}>Ads keep this free</span>
           <button
             onClick={() => showAdThenDownload(handleExportPDF)}
-            disabled={exporting}
+            disabled={exporting || !hasContent}
             style={{
               display: 'flex', alignItems: 'center', gap: '8px',
               background: 'linear-gradient(135deg, #00D4FF 0%, #7B61FF 100%)',
               color: '#fff', padding: '9px 20px', borderRadius: '9px',
               fontSize: '14px', fontWeight: 700, border: 'none',
-              cursor: exporting ? 'wait' : 'pointer',
+              cursor: exporting ? 'wait' : (!hasContent ? 'not-allowed' : 'pointer'),
               boxShadow: '0 0 20px rgba(0,212,255,0.2)',
-              opacity: exporting ? 0.7 : 1, transition: 'all 0.2s', letterSpacing: '0.01em',
+              opacity: exporting || !hasContent ? 0.6 : 1, transition: 'all 0.2s', letterSpacing: '0.01em',
             }}
             onMouseEnter={e => { if (!exporting) e.currentTarget.style.boxShadow = '0 0 30px rgba(0,212,255,0.35)' }}
             onMouseLeave={e => e.currentTarget.style.boxShadow = '0 0 20px rgba(0,212,255,0.2)'}
@@ -226,11 +258,24 @@ export default function Builder() {
 
         <div
           ref={previewContainerRef}
-          style={{ flex: 1, overflow: 'auto', background: '#1C1C28', display: mobileMode ? (showPreview ? 'block' : 'none') : (!showPreview ? undefined : 'block'), padding: '32px' }}
+          style={{ flex: 1, overflow: 'auto', background: '#1C1C28', display: mobileMode ? (showPreview ? 'block' : 'none') : (!showPreview ? undefined : 'block'), padding: '32px 32px 20px' }}
         >
           <ResumePreview data={data} template={template} previewRef={previewRef} scale={previewScale} />
         </div>
       </div>
+
+      {toast && (
+        <div style={{
+          position: 'fixed', right: '20px', bottom: '20px', zIndex: 120,
+          background: toast.type === 'error' ? 'rgba(255,77,109,0.12)' : 'rgba(0,212,255,0.12)',
+          border: toast.type === 'error' ? '1px solid rgba(255,77,109,0.35)' : '1px solid rgba(0,212,255,0.35)',
+          color: toast.type === 'error' ? '#FF4D6D' : '#9DEBFF',
+          padding: '10px 14px', borderRadius: '10px', fontSize: '13px',
+          backdropFilter: 'blur(10px)',
+        }}>
+          {toast.text}
+        </div>
+      )}
 
       <style>{`
         @media (max-width: 768px) { 
