@@ -1,124 +1,101 @@
 # ResumeForge — Professional Resume Builder
 
-A modern, free resume builder web application built with React, Tailwind CSS, and Vite. Create professional resumes with live preview, multiple templates, and PDF export.
+A modern resume builder: live preview, multiple templates, photo upload, local auto-save, and PDF export.
+
+**Live:** [resume-builder-pi-ashy-71.vercel.app](https://resume-builder-pi-ashy-71.vercel.app)
+
+---
+
+## About This Project
+
+This app exists because I imagined the product — the flows, the templates, the feel of the builder — and wanted it built end-to-end. **Every product and design decision is mine.** The implementation was executed with AI coding assistants ([Claude](https://claude.ai), [Cursor](https://cursor.sh)) turning that vision into React, styles, and wiring.
+
+> I had the ideas. The assistants wrote the code. The result is my project.
+
+**Solo project:** There are no co-maintainers and no automated bots committing to this repository. All changes land through **manual commits and `git push` from my machine**; Vercel then builds from the latest push.
+
+---
 
 ## Features
 
-- **Live Preview** — See your resume update in real-time as you type
-- **3 Professional Templates** — Modern (two-column), Classic (traditional), Minimal (clean)
-- **PDF Export** — Download your resume as a high-quality PDF
-- **Photo Upload** — Add a professional headshot
-- **Auto-Save** — All data persists in browser localStorage
-- **Mobile Responsive** — Works on phones, tablets, and desktops
-- **Professional Fonts** — Inter, Crimson Pro, Space Grotesk from Google Fonts
+- **Live preview** — Resume updates as you type  
+- **Multiple templates** — Modern, Classic, Minimal, and more  
+- **PDF export** — Download via html2pdf.js  
+- **Photo upload** — Headshot support  
+- **Auto-save** — Persists in `localStorage`  
+- **Responsive** — Usable on phone through desktop  
+
+---
 
 ## Tech Stack
 
-- **React 19** — UI framework
-- **Vite 7** — Build tool
-- **Tailwind CSS 4** — Utility-first styling
-- **React Router 7** — Client-side routing
-- **html2pdf.js** — PDF generation
+| Layer        | Choice                          |
+| ------------ | ------------------------------- |
+| UI           | React 19                        |
+| Build        | Vite 7                          |
+| Styling      | Tailwind CSS 4                  |
+| Routing      | React Router 7                  |
+| PDF          | html2pdf.js                     |
+| Hosting      | Vercel                          |
+
+---
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 18+ and npm
-
-### Install & Run
+**Prerequisites:** Node.js 18+ and npm
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173) in your browser.
+Open [http://localhost:5173](http://localhost:5173).
 
-### Build for Production
+**Production build**
 
 ```bash
 npm run build
 ```
 
-The output will be in the `dist/` folder.
+Output: `dist/`.
 
-## Deploy on Vercel
+---
 
-### Option 1: Vercel CLI
+## Deployment (manual)
 
-```bash
-# Install Vercel CLI
-npm i -g vercel
+There is **no CI that pushes commits for you**. Typical flow:
 
-# Deploy (from project root)
-vercel
+1. Work locally, commit when ready  
+2. `git push origin main`  
+3. Vercel picks up the push and runs `npm run build`  
 
-# For production deployment
-vercel --prod
-```
+Optional: `vercel --prod` from the project root if you deploy via CLI.
 
-### Option 2: Vercel Dashboard (Recommended)
+**SPA routing on Vercel** — `vercel.json` rewrites all routes to `index.html` (already included).
 
-1. Push your code to a GitHub repository
-2. Go to [vercel.com](https://vercel.com) and sign in with GitHub
-3. Click **"Add New Project"**
-4. Import your GitHub repository
-5. Vercel auto-detects Vite — just click **"Deploy"**
-6. Your site will be live at `https://your-project.vercel.app`
+---
 
-Vercel automatically:
-- Detects the Vite framework
-- Runs `npm run build`
-- Serves the `dist/` folder
-- Sets up SPA routing
-
-### SPA Routing Fix
-
-For client-side routing to work on Vercel, create a `vercel.json` in the project root:
-
-```json
-{
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
-}
-```
-
-## Project Structure
+## Project structure (high level)
 
 ```
-resume-builder/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   ├── templates/
-│   │   │   ├── ModernTemplate.jsx    # Two-column sidebar layout
-│   │   │   ├── ClassicTemplate.jsx   # Traditional single-column
-│   │   │   └── MinimalTemplate.jsx   # Clean, spacious design
-│   │   ├── Builder.jsx               # Main builder page
-│   │   ├── Landing.jsx               # Landing/marketing page
-│   │   ├── ResumeForm.jsx            # Form with all sections
-│   │   ├── ResumePreview.jsx         # Live preview wrapper
-│   │   ├── TemplateSelector.jsx      # Template switcher
-│   │   ├── Logo.jsx                  # Brand logo component
-│   │   └── Footer.jsx                # Site footer
-│   ├── hooks/
-│   │   ├── useLocalStorage.js        # localStorage persistence
-│   │   └── useResumeData.js          # Resume state management
-│   ├── App.jsx                       # Route definitions
-│   ├── index.css                     # Global styles & Tailwind
-│   └── main.jsx                      # App entry point
-├── index.html
-├── package.json
-├── vite.config.js
-└── README.md
+src/
+  components/     # Builder, Landing, templates, forms, AI UI
+  hooks/          # resume state, localStorage
+  data/           # sample resumes
 ```
+
+---
+
+## Contributing
+
+Not open for outside contributions — personal portfolio piece. See [`.github/CONTRIBUTING.md`](.github/CONTRIBUTING.md).
+
+---
 
 ## License
 
-MIT
+MIT — learn from it; don’t copy wholesale.
+
+---
+
+*Adithya M · Bangalore, India · 2026*
