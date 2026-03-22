@@ -1,8 +1,10 @@
 # ResumeForge — Professional Resume Builder
 
-A modern resume builder: live preview, multiple templates, photo upload, local auto-save, and PDF export.
+### [https://resume-builder-pi-ashy-71.vercel.app](https://resume-builder-pi-ashy-71.vercel.app)
 
-**Live:** [resume-builder-pi-ashy-71.vercel.app](https://resume-builder-pi-ashy-71.vercel.app)
+**Hosting:** Vercel (production deploy from `main`).
+
+A modern resume builder: live preview, multiple templates, photo upload, local auto-save, and PDF export.
 
 ---
 
@@ -63,11 +65,13 @@ Output: `dist/`.
 
 ## Deployment (manual)
 
+**Production site:** [https://resume-builder-pi-ashy-71.vercel.app](https://resume-builder-pi-ashy-71.vercel.app)
+
 There is **no CI that pushes commits for you**. Typical flow:
 
 1. Work locally, commit when ready  
 2. `git push origin main`  
-3. Vercel picks up the push and runs `npm run build`  
+3. Vercel picks up the push and runs `npm run build` — updates the live URL above  
 
 Optional: `vercel --prod` from the project root if you deploy via CLI.
 
